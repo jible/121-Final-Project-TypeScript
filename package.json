@@ -8,7 +8,8 @@
         "dev": "node log.js dev &parcel index.html --no-cache --config ./parcel/.parcel.dev --open",
         "build": "node log.js build &parcel build index.html --public-url _relativeroute_ --no-source-maps --log-level error --config ./parcel/.parcel.prod",
         "dev-nolog": "parcel index.html --no-cache --config ./parcel/.parcel.dev --open",
-        "build-nolog": "parcel build index.html --public-url _relativeroute_ --no-source-maps --log-level error --config ./parcel/.parcel.prod"
+        "build-nolog": "parcel build index.html --public-url _relativeroute_ --no-source-maps --log-level error --config ./parcel/.parcel.prod",
+        "prepare": "husky"
     },
     "repository": {
         "type": "git",
@@ -22,19 +23,32 @@
     },
     "homepage": "https://github.com/phaserjs/template-parcel-ts#readme",
     "devDependencies": {
+        "@eslint/js": "^9.16.0",
         "@parcel/transformer-glsl": "^2.12.0",
         "@parcel/transformer-typescript-tsc": "^2.12.0",
+        "eslint": "^9.16.0",
+        "eslint-config-prettier": "^9.1.0",
         "express": "^4.19.2",
+        "globals": "^15.13.0",
+        "husky": "^9.1.7",
         "parcel": "^2.12.0",
         "parcel-reporter-clean-dist": "^1.0.4",
         "parcel-reporter-static-files-copy": "^1.5.3",
+        "prettier": "3.4.1",
         "process": "^0.11.10",
-        "typescript": "^5.4.5"
+        "typescript": "^5.4.5",
+        "typescript-eslint": "^8.16.0"
     },
     "dependencies": {
         "phaser": "^3.87.0"
     },
     "staticFiles": {
         "staticPath": "public"
+    },
+    "lint-staged": {
+        "*.ts": [
+            "eslint --fix",
+            "prettier --write"
+        ]
     }
 }
