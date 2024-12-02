@@ -98,6 +98,7 @@ export class World {
                 this.#renderTile(x, y, index)
             }
         }
+        this.generateRandomWeather()
     }
 
     exportWorldInstance() {
@@ -175,7 +176,6 @@ export class World {
 
         const currentDay = this.gameManager.time.day
         const weather = worldPresets.days[currentDay]
-        console.log(worldPresets.days)
         if (weather == "sunny"){
             console.log("making it a sunny day")
             for (let x = 0; x < this.gridSize.width; x++) {
@@ -199,15 +199,26 @@ export class World {
             }
             console.log("making it a rainyday")
             return
-        }
-        for (let x = 0; x < this.gridSize.width; x++) {
-            for (let y = 0; y < this.gridSize.height; y++) {
-                const tile = this.getTile(new Vector(x, y))
-                //water level can be stored up, sun level cannot per F0.d
-                tile.waterLvl = tile.waterLvl + Math.floor(Math.random() * 3)
-                tile.sunLvl = Math.floor(Math.random() * 3)
+        } else if ( worldPresets.weatherRandom){
+            for (let x = 0; x < this.gridSize.width; x++) {
+                for (let y = 0; y < this.gridSize.height; y++) {
+                    const tile = this.getTile(new Vector(x, y))
+                    //water level can be stored up, sun level cannot per F0.d
+                    tile.waterLvl = tile.waterLvl + Math.floor(Math.random() * 3)
+                    tile.sunLvl = Math.floor(Math.random() * 3)
+                }
+            }
+        } else {
+            for (let x = 0; x < this.gridSize.width; x++) {
+                for (let y = 0; y < this.gridSize.height; y++) {
+                    const tile = this.getTile(new Vector(x, y))
+                    //water level can be stored up, sun level cannot per F0.d
+                    tile.waterLvl = 5
+                    tile.sunLvl = 2
+                }
             }
         }
+        
     }
 
     getTile(pos: {x: number, y: number}): any | null {

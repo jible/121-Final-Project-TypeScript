@@ -31,8 +31,6 @@ export class Menu extends Phaser.Scene {
     loadSave(fileNum: number){
         const fileName = "Slot:" + fileNum.toString()
         let file = localStorage.getItem(fileName)
-        console.log(globalConstants.defaultSaveData);
-        console.log(file)
         if ( !file ) {
             console.log(JSON.stringify(globalConstants.defaultSaveData))
             localStorage.setItem(fileName, JSON.stringify(globalConstants.defaultSaveData))

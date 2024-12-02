@@ -1,7 +1,6 @@
 export function parseDSL(
     input: string = `rules:
 weather-random: true
-starting-weather: sunny
 winning-plant-num: 3
 winning-plant-growth: 3
 end-rules
@@ -46,11 +45,6 @@ end-file`,
                     console.log(`WEATHER RANDOM?: ${words[1]}`)
                     // COMMAND FOR RANDOM OR SET WEATHER
                     worldPresets.weatherRandom = words[1] == "true"? true: false 
-                    break
-                case 'starting-weather:':
-                    console.log(`STARTING WEATHER: ${words[1]}`)
-                    // COMMAND TO SET WEATHER FOR A DAY, ON THE FIRST DAY
-                    worldPresets.startingWeather = words[1] 
                     break
                 case 'winning-plant-num:':
                     console.log(`NUMBER OF WINNING PLANTS TO BEAT GAME: ${words[1]}`)

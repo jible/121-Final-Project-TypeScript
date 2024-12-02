@@ -10,9 +10,9 @@ const bitDetailsIndex = {
 
 // amount bits per attribute
 const bitLayout = [
-  { bits: 2, shift: 0, mask: 0 },
+  { bits: 3, shift: 0, mask: 0 },
   { bits: 5, shift: 0, mask: 0 },
-  { bits: 7, shift: 0, mask: 0 },
+  { bits: 6, shift: 0, mask: 0 },
   { bits: 2, shift: 0, mask: 0 },
 ];
 let tileBitSize = 0;

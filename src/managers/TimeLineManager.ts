@@ -45,8 +45,6 @@ export class worldTimeLine {
     }
 
     loadGame(data : string) {
-
-        console.log(data)
         const sampleStates = JSON.parse(data)
         this.currentAction = sampleStates.currentAction
         this.formerStates = sampleStates.formerStates
