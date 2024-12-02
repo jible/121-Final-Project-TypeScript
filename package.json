@@ -6,10 +6,12 @@
     "browserslist": "> 0.25%, last 2 versions, not dead",
     "scripts": {
         "dev": "node log.js dev &parcel index.html --no-cache --config ./parcel/.parcel.dev --open",
-        "build": "node log.js build &parcel build index.html --public-url _relativeroute_ --no-source-maps --log-level error --config ./parcel/.parcel.prod",
+        "build": "node log.js build & parcel build index.html --public-url ./ --no-source-maps --log-level error --config ./parcel/.parcel.prod",
         "dev-nolog": "parcel index.html --no-cache --config ./parcel/.parcel.dev --open",
         "build-nolog": "parcel build index.html --public-url _relativeroute_ --no-source-maps --log-level error --config ./parcel/.parcel.prod",
-        "prepare": "husky"
+        "prepare": "husky",
+        "predeploy": "npm run build",
+        "deploy": "gh-pages -d dist"
     },
     "repository": {
         "type": "git",
@@ -29,6 +31,7 @@
         "eslint": "^9.16.0",
         "eslint-config-prettier": "^9.1.0",
         "express": "^4.19.2",
+        "gh-pages": "^6.2.0",
         "globals": "^15.13.0",
         "husky": "^9.1.7",
         "parcel": "^2.12.0",
