@@ -46,7 +46,6 @@ export class Menu extends Phaser.Scene {
         const content = this.add.text(x + padding / 2, y + padding / 2, text, {
             fontSize: `${textSize - 2}px`,
             lineSpacing: 0,
-            resolution: 3
         })
         content.height = textSize
         const UIBox = this.add.rectangle(
