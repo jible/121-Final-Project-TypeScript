@@ -1,29 +1,32 @@
-import { Boot } from './scenes/Boot';
-import { Game as MainGame } from './scenes/Game';
-import { GameOver } from './scenes/GameOver';
-import { MainMenu } from './scenes/MainMenu';
-import { Preloader } from './scenes/Preloader';
+import { globalConstants } from './utils/globalConsts';
+import { Load } from './scenes/Load';
+import { Menu } from './scenes/Menu';
+import { Play } from './scenes/Play';
 
 import { Game, Types } from "phaser";
+import { UI } from './scenes/UI';
+import { Keys } from './scenes/Keys';
 
 //  Find out more information about the Game Config at:
 //  https://newdocs.phaser.io/docs/3.70.0/Phaser.Types.Core.GameConfig
 const config: Types.Core.GameConfig = {
     type: Phaser.AUTO,
-    width: 1024,
-    height: 768,
+    render: {
+        pixelArt:true,
+    },
+    width: globalConstants.gameDimensions.width,
+    height: globalConstants.gameDimensions.height,
     parent: 'game-container',
-    backgroundColor: '#028af8',
     scale: {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH
     },
+    zoom: Math.min(
+        window.innerHeight / globalConstants.gameDimensions.height - 0.5,
+        window.innerWidth / globalConstants.gameDimensions.width - 0.1,
+    ),
     scene: [
-        Boot,
-        Preloader,
-        MainMenu,
-        MainGame,
-        GameOver
+        Load, Menu, Play,Keys, UI,
     ]
 };
 
