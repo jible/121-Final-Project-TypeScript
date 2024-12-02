@@ -6,16 +6,14 @@ const bitDetailsIndex = {
   WATER_LEVEL: 1,
   SPECIES: 2,
   GROWTH_LEVEL: 3,
-  EXTRA: 4,
 };
 
 // amount bits per attribute
 const bitLayout = [
   { bits: 2, shift: 0, mask: 0 },
   { bits: 2, shift: 0, mask: 0 },
-  { bits: 3, shift: 0, mask: 0 },
+  { bits: 10, shift: 0, mask: 0 },
   { bits: 2, shift: 0, mask: 0 },
-  { bits: 7, shift: 0, mask: 0 },
 ];
 let tileBitSize = 0;
 for (let i of bitLayout) {

@@ -89,7 +89,7 @@ export function initializePlayerState(player: Player) {
             },
             exit() {},
             update() {
-                if (keys.gKey && keys.gKey.isDown) {
+                if (keys.gKey && !keys.gKey.isDown) {
                     player.sm.changeState('idle')
                 }
             },

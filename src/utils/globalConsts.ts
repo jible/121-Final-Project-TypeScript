@@ -138,6 +138,6 @@ export const globalConstants = {
         },
         formerStates: [],
         undoneStates: [],
-    }
+    },
     
 }
