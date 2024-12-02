@@ -1,11 +1,13 @@
+import { GameManager } from "../managers/GameManager"
 import { globalConstants } from "../utils/globalConsts"
-
+import { UI } from "./UI"
 
 
 export class Play extends Phaser.Scene {
     BUTTON_LAYER = 100
     TILE_SIZE = globalConstants.tileSize
-    SAVE_NAME: String
+    SAVE_NAME: string
+    gameManager: GameManager
     constructor() {
         super('playScene')
     }
@@ -22,21 +24,22 @@ export class Play extends Phaser.Scene {
         console.log('%cPLAY SCENE :^)', globalConstants.testColor)
         console.log(`SAVE NAME = ${this.SAVE_NAME}`)
 
-        this.scene.get('uiScene').displayPlayUI()
+        const uiScene = this.scene.get('uiScene')
+        uiScene instanceof UI && uiScene.displayPlayUI()
 
         // Add grid and player to the scene
-        this.gameManager = new GameManager(this, worldDimensions, this.TILE_SIZE, this.SAVE_NAME)
+        this.gameManager = new GameManager(this, globalConstants.worldDimensions, this.TILE_SIZE, this.SAVE_NAME)
         this.cameras.main.centerOn(
-            centerX - this.TILE_SIZE,
-            centerY - this.TILE_SIZE * worldPadding - this.TILE_SIZE * 2,
+            globalConstants.centerX - this.TILE_SIZE,
+            globalConstants.centerY - this.TILE_SIZE * globalConstants.worldPadding - this.TILE_SIZE * 2,
         )
     }
 
-    update(time, delta) {
+    update(time: number, delta:number) {
         this.gameManager.update(time, delta)
     }
 
-    constructButton(x, y, textSize, padding, text = 'default text', result) {
+    constructButton(x:number, y:number, textSize:number, padding:number, text:string = 'default text', result:Function) {
         const content = this.add.text(x + padding / 2, y + padding / 2, text, {
             fontSize: `${textSize - 2}px`,
             lineSpacing: 0,
@@ -60,31 +63,5 @@ export class Play extends Phaser.Scene {
         UIBox.setInteractive().on('pointerdown', result)
 
         return button
-    }
-
-    save() {
-        let saveNames = localStorage.getItem('saveNames').split('/')
-        let saveFiles = localStorage.getItem('saveFiles').split('/')
-        if (saveNames.find(element => element == this.SAVE_NAME)) {
-            const key = saveNames.find(element => element == this.SAVE_NAME)
-            const index = saveNames.indexOf(key)
-
-            if (index > -1) {
-                const newData = this.gameManager.exportGame()
-                saveFiles[index] = newData
-                localStorage.setItem('saveFiles', saveFiles.join('/'))
-            }
-        } else {
-            console.log('there is no save file under that name')
-            console.log(saveNames)
-        }
-    }
-
-    undo() {
-        // MUST follow D2 example
-    }
-
-    redo() {
-        // MUST follow D2 example
     }
 }

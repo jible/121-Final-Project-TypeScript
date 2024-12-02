@@ -1,3 +1,5 @@
+import Phaser from "phaser";
+
 const tileSize = 8;
 const worldPadding = 2;
 const worldDimensions = { width: 12, height: 8 };
@@ -6,12 +8,23 @@ const gameDimensions = {
     height: tileSize * worldDimensions.height + tileSize * 3 + tileSize * worldPadding,
 }
 
-export const keys = {
-    cursors: null, 
-    space: null,
-    eKey: null, 
-    gKey: null
+
+
+// Define the keys object shape
+export interface KeysObject {
+    cursors: Phaser.Types.Input.Keyboard.CursorKeys | null; // CursorKeys or null
+    space: Phaser.Input.Keyboard.Key | null;
+    eKey: Phaser.Input.Keyboard.Key | null;
+    gKey: Phaser.Input.Keyboard.Key | null;
 }
+
+// Export a properly typed `keys` object
+export const keys: KeysObject = {
+    cursors: null,
+    space: null,
+    eKey: null,
+    gKey: null,
+};
 
 
 export const globalConstants = {

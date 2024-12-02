@@ -1,6 +1,6 @@
 import { globalConstants } from "../utils/globalConsts";
 
-class Menu extends Phaser.Scene {
+export class Menu extends Phaser.Scene {
     static SPLIT: string = '/'
     constructor() {
         super('menuScene')
