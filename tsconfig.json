@@ -24,6 +24,7 @@
         "strictPropertyInitialization": false
     },
     "include": [
-        "src"
+        "src",
+        "node_modules/@types"
     ]
 }
