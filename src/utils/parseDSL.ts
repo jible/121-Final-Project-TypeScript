@@ -1,10 +1,9 @@
 export function parseDSL(
-    input: string = `
-rules:
+    input: string = `rules:
 weather-random: true
 starting-weather: sunny
 winning-plant-num: 3
-winning-plant-growth: 4
+winning-plant-growth: 3
 end-rules
 day 1:
 weather: sunny
@@ -12,9 +11,24 @@ end-day
 day 2:
 weather: rainy
 end-day
-    `,
+end-file`,
 ) {
     const lines = input.split('\n')
+    interface presetCollection {
+        weatherRandom: boolean,
+        startingWeather: string,
+        winningPlantNum: number,
+        winningPlantGrowth: number,
+        days: string[],
+    }
+    const worldPresets: presetCollection = {
+        weatherRandom: false,
+        startingWeather: "sunny",
+        winningPlantNum: 3,
+        winningPlantGrowth: 3,
+        days: [],
+    }
+
 
     let day: number = 0
     let weather: string = ''
@@ -24,23 +38,28 @@ end-day
             const words = line.split(' ')
             switch (words[0]) {
                 case 'rules:':
+                    
                     console.log('STARTING RULES SECTION:')
                     break
                 case 'weather-random:':
+                    
                     console.log(`WEATHER RANDOM?: ${words[1]}`)
                     // COMMAND FOR RANDOM OR SET WEATHER
+                    worldPresets.weatherRandom = words[1] == "true"? true: false 
                     break
                 case 'starting-weather:':
                     console.log(`STARTING WEATHER: ${words[1]}`)
                     // COMMAND TO SET WEATHER FOR A DAY, ON THE FIRST DAY
+                    worldPresets.startingWeather = words[1] 
                     break
                 case 'winning-plant-num:':
                     console.log(`NUMBER OF WINNING PLANTS TO BEAT GAME: ${words[1]}`)
-
+                    worldPresets.winningPlantNum = Number(words[1])
                     // COMMAND TO CHANGE WIN CONDITION
                     break
                 case 'winning-plant-growth:':
                     console.log(`WINNING PLANT GROWTH LEVEL: ${words[1]}`)
+                    worldPresets.winningPlantGrowth = Number(words[1])
                     // COMMAND TO CHANGE WIN CONDITION
                     break
                 case 'day':
@@ -55,6 +74,7 @@ end-day
                     console.log(`SETTING WEATHER ON DAY ${day}`)
                     weather = words[1]
                     console.log(`WEATHER SET TO: ${weather}`)
+                    worldPresets.days [day] = weather
                     break
                 case 'end-day':
                     console.log(`RUNNING COMMAND TO SET DAY ${day}'S WEATHER TO ${weather}`)
@@ -62,9 +82,17 @@ end-day
                 case 'end-rules':
                     console.log('RULES DONE')
                     break
+                case 'end-file':
+                    
+                    break
                 default:
                     console.error('Bad formatting of the .dsl file.')
             }
         }
     }
+
+    return(worldPresets)
 }
+
+
+export const worldPresets = parseDSL()

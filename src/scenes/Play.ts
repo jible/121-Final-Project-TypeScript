@@ -1,5 +1,6 @@
 import { GameManager } from "../managers/GameManager"
 import { globalConstants } from "../utils/globalConsts"
+import { parseDSL } from "../utils/parseDSL"
 import { UI } from "./UI"
 
 
@@ -33,6 +34,8 @@ export class Play extends Phaser.Scene {
             globalConstants.centerX - this.TILE_SIZE,
             globalConstants.centerY - this.TILE_SIZE * globalConstants.worldPadding - this.TILE_SIZE * 2,
         )
+
+        
     }
 
     update(time: number, delta:number) {

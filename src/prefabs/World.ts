@@ -3,6 +3,7 @@ import { GameManager } from "../managers/GameManager";
 import { Plant } from "../prefabs/Plants.ts";
 import { bitWiseHelper } from "../utils/BitHelpers.ts";
 import { Clock } from "../utils/clock.ts"
+import { worldPresets } from "../utils/parseDSL.ts";
 export class Tile {
     gameManager: GameManager
     plant: Plant|null
@@ -171,6 +172,34 @@ export class World {
     }
 
     generateRandomWeather() {
+
+        const currentDay = this.gameManager.time.day
+        const weather = worldPresets.days[currentDay]
+        console.log(worldPresets.days)
+        if (weather == "sunny"){
+            console.log("making it a sunny day")
+            for (let x = 0; x < this.gridSize.width; x++) {
+                for (let y = 0; y < this.gridSize.height; y++) {
+                    const tile = this.getTile(new Vector(x, y))
+                    //water level can be stored up, sun level cannot per F0.d
+                    tile.waterLvl = tile.waterLvl + Math.floor(Math.random() * 3)
+                    tile.sunLvl = 3
+                }
+            }
+            return
+        } else if ( weather == "rainy"){
+
+            for (let x = 0; x < this.gridSize.width; x++) {
+                for (let y = 0; y < this.gridSize.height; y++) {
+                    const tile = this.getTile(new Vector(x, y))
+                    //water level can be stored up, sun level cannot per F0.d
+                    tile.waterLvl = tile.waterLvl + 5
+                    tile.sunLvl = Math.floor(Math.random() * 2)
+                }
+            }
+            console.log("making it a rainyday")
+            return
+        }
         for (let x = 0; x < this.gridSize.width; x++) {
             for (let y = 0; y < this.gridSize.height; y++) {
                 const tile = this.getTile(new Vector(x, y))
