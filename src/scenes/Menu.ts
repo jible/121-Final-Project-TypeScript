@@ -13,15 +13,16 @@ export class Menu extends Phaser.Scene {
         const LoadFileHeight = 2 * globalConstants.tileSize;
         const deleteFileHeight = 4 * globalConstants.tileSize;
         for (let i = 1; i <= saveSlotCount; i++){
-            const x = i * (globalConstants.tileSize * 10) - globalConstants.tileSize * 9;
-            this.constructButton( x, LoadFileHeight, 10, 6, "Load Slot " + (i).toString(), ()=>{
+            const x = i * (globalConstants.tileSize * 3) ;
+            this.constructButton( x, LoadFileHeight , 10, 6,  (i).toString(), ()=>{
                 this.loadSave(i)
             })
-            this.constructButton( x, deleteFileHeight, 10 ,6, " Delete Slot " + (i).toString(), () => {
+            this.constructButton( x, deleteFileHeight, 10 ,6,  "X", () => {
                 this.deleteSave(i)
             })
         }
     }
+
 
     deleteSave(fileNum: number){
         const fileName = "Slot:" + fileNum.toString()
@@ -32,7 +33,6 @@ export class Menu extends Phaser.Scene {
         const fileName = "Slot:" + fileNum.toString()
         let file = localStorage.getItem(fileName)
         if ( !file ) {
-            console.log(JSON.stringify(globalConstants.defaultSaveData))
             localStorage.setItem(fileName, JSON.stringify(globalConstants.defaultSaveData))
         }
         this.scene.start('playScene', {
