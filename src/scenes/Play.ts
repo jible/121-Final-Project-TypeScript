@@ -7,11 +7,11 @@ interface PlayInitData {
 }
 
 export class Play extends Phaser.Scene {
-    BUTTON_LAYER = 100;
-    TILE_SIZE = globalConstants.tileSize;
-    SAVE_NAME: string;
-    gameManager: GameManager;
-
+    BUTTON_LAYER = 100
+    TILE_SIZE = globalConstants.tileSize
+    SAVE_NAME: string
+    gameManager: GameManager
+    localization: Localization
     constructor() {
         super('playScene');
     }
@@ -20,12 +20,14 @@ export class Play extends Phaser.Scene {
         this.BUTTON_LAYER = 100;
         this.TILE_SIZE = globalConstants.tileSize;
 
-        this.SAVE_NAME = data.SAVE_NAME;
+        this.SAVE_NAME = data.SAVE_NAME
+        this.localization = data.LOCALIZATION
     }
 
     create() {
         // Initialize the world and player
         console.log('%cPLAY SCENE :^)', globalConstants.testColor);
+        console.log(this.localization.translate("gameplay.play_scene"));
         console.log(`SAVE NAME = ${this.SAVE_NAME}`);
 
         const uiScene = this.scene.get('uiScene');
