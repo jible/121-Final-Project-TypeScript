@@ -121,7 +121,7 @@ export class Load extends Phaser.Scene {
             key: 'player-reap',
             frames: this.anims.generateFrameNames('player', {
                 start: 32,
-                end: 35,
+                end: 39,
             }),
             frameRate: 10,
             repeat: 0,
@@ -131,7 +131,7 @@ export class Load extends Phaser.Scene {
             key: 'player-sow',
             frames: this.anims.generateFrameNames('player', {
                 start: 24,
-                end: 27,
+                end: 31,
             }),
             frameRate: 10,
             repeat: 0,
