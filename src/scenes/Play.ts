@@ -3,6 +3,11 @@ import { globalConstants } from "../utils/globalConsts"
 import { parseDSL } from "../utils/parseDSL"
 import { UI } from "./UI"
 
+// localization
+import en from "../locales/en.json" assert {type: 'json'};
+import { Localization } from "../utils/localization";
+
+const localization = new Localization(en);
 
 export class Play extends Phaser.Scene {
     BUTTON_LAYER = 100
@@ -22,7 +27,8 @@ export class Play extends Phaser.Scene {
 
     create() {
         // Initialize the world and player
-        console.log('%cPLAY SCENE :^)', globalConstants.testColor)
+        // console.log('%cPLAY SCENE :^)', globalConstants.testColor)
+        console.log(localization.translate("gameplay.play_scene"));
         console.log(`SAVE NAME = ${this.SAVE_NAME}`)
 
         const uiScene = this.scene.get('uiScene')
@@ -35,7 +41,6 @@ export class Play extends Phaser.Scene {
             globalConstants.centerY - this.TILE_SIZE * globalConstants.worldPadding - this.TILE_SIZE * 2,
         )
 
-        
     }
 
     update(time: number, delta:number) {

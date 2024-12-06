@@ -1,0 +1,9 @@
+{
+    "menu.start_game": "Start Game",
+    "menu.exit_game": "Exit Game",
+    "menu.settings": "Settings",
+    "gameplay.score_label": "Score:",
+    "gameplay.time_remaining": "Time Remaining",
+    "gameplay.pause": "Game Paused",
+    "gameplay.play_scene": "Play Scene"
+}
