@@ -11,6 +11,8 @@ import { Play } from "./Play";
 export class UI extends Phaser.Scene {
   BUTTON_LAYER = 100;
   TILE_SIZE = globalConstants.tileSize;
+  TEXT_SIZE = 10
+  PADDING = 6
   SAVE_NAME: string;
 
   constructor() {
@@ -22,62 +24,109 @@ export class UI extends Phaser.Scene {
     console.log("%cMENU SCENE :^)", globalConstants.testColor);
   }
 
-  displayPlayUI() {
-    // Tick Button
-    constructTextButton(this,this.TILE_SIZE, this.TILE_SIZE, 10, 6, "t", () =>
-      this.tick()
-    );
-
-    // Save Button
-    constructTextButton(this,4 * this.TILE_SIZE, this.TILE_SIZE, 10, 6, "s", () =>
-      this.save()
-    );
-
-    // Undo Button
-    constructTextButton(this,7 * this.TILE_SIZE, this.TILE_SIZE, 10, 6, "u", () =>
-      this.undo()
-    );
-
-    // Redo Button
-    constructTextButton(this,10 * this.TILE_SIZE, this.TILE_SIZE, 10, 6, "r", () =>
-      this.redo()
-    );
-
-    // Up Button
-    const uiZoneHeight= globalConstants.uiZone.top;
-    constructTextButton(this,4 * this.TILE_SIZE, uiZoneHeight , 10, 6, "^", 
-      () =>InputHandler.up = true,
-      () =>InputHandler.up = false
-    );
-
-    constructTextButton(this,4 * this.TILE_SIZE, uiZoneHeight +(3 *this.TILE_SIZE), 10, 6, "_", 
-      () => InputHandler.down = true
-    , () => InputHandler.down = false
-    );
+  displayPlayUI(): void {
     
-    constructTextButton(this,1 * this.TILE_SIZE,uiZoneHeight +(3 *this.TILE_SIZE), 10, 6, "<", 
-      () => InputHandler.left = true
-    , () => InputHandler.left = false
-    );
+    //#region ----------------------------------- GAME STATE BUTTONS
 
-    constructTextButton(this,7 * this.TILE_SIZE, uiZoneHeight +(3 *this.TILE_SIZE), 10, 6, ">", 
-      () => InputHandler.right = true
-    , () => InputHandler.right = false
-    );
+    const buttonConfigs: {
+      xMultiplier: number;
+      text: string;
+      callback: () => void;
+    }[] = [
+      { xMultiplier: 1, text: "t", callback: () => this.tick() },  // Tick Button
+      { xMultiplier: 4, text: "s", callback: () => this.save() },  // Save Button
+      { xMultiplier: 7, text: "u", callback: () => this.undo() },  // Undo Button
+      { xMultiplier: 10, text: "r", callback: () => this.redo() }, // Redo Button
+    ];
+  
+    buttonConfigs.forEach((config) => {
+      constructTextButton(
+        this,
+        config.xMultiplier * this.TILE_SIZE,  // X
+        this.TILE_SIZE,                       // Y
+        this.TEXT_SIZE,                       // Text-size
+        this.PADDING,                         // Padding
+        config.text,
+        config.callback
+      );
+    });
 
-    constructTextButton(this,11 * this.TILE_SIZE, uiZoneHeight , 10, 6, "}", 
-      () => InputHandler.reap = true
-    , () => InputHandler.reap = false
-    );
+    //#endregion
 
-    constructTextButton(this,11 * this.TILE_SIZE, uiZoneHeight +(3 *this.TILE_SIZE), 10, 6, "{", 
-      () => InputHandler.sow = true
-    , () => InputHandler.sow = false
-    );
+    //#region------------------------------------ PLAYER INTERACTION BUTTONS
+
+    const uiZoneHeight= globalConstants.uiZone.top;
+
+    const interactionButtonConfigs: {
+      xMultiplier: number;
+      yOffset: number;
+      text: string;
+      onPress: () => void;
+      onRelease?: () => void;
+    }[] = [
+      {
+        xMultiplier: 4,
+        yOffset: 0,
+        text: "^",
+        onPress: () => (InputHandler.up = true),
+        onRelease: () => (InputHandler.up = false),
+      },
+      {
+        xMultiplier: 4,
+        yOffset: 3 * this.TILE_SIZE,
+        text: "_",
+        onPress: () => (InputHandler.down = true),
+        onRelease: () => (InputHandler.down = false),
+      },
+      {
+        xMultiplier: 1,
+        yOffset: 3 * this.TILE_SIZE,
+        text: "<",
+        onPress: () => (InputHandler.left = true),
+        onRelease: () => (InputHandler.left = false),
+      },
+      {
+        xMultiplier: 7,
+        yOffset: 3 * this.TILE_SIZE,
+        text: ">",
+        onPress: () => (InputHandler.right = true),
+        onRelease: () => (InputHandler.right = false),
+      },
+      {
+        xMultiplier: 11,
+        yOffset: 0,
+        text: "}",
+        onPress: () => (InputHandler.reap = true),
+        onRelease: () => (InputHandler.reap = false),
+      },
+      {
+        xMultiplier: 11,
+        yOffset: 3 * this.TILE_SIZE,
+        text: "{",
+        onPress: () => (InputHandler.sow = true),
+        onRelease: () => (InputHandler.sow = false),
+      },
+    ];
+    
+    interactionButtonConfigs.forEach((config) => {
+      constructTextButton(
+        this,
+        config.xMultiplier * this.TILE_SIZE,  // X
+        uiZoneHeight + config.yOffset,        // Y
+        this.TEXT_SIZE,                       // Text-size
+        this.PADDING,                         // Padding
+        config.text,                          // Button text
+        config.onPress,                       // Button press callback
+        config.onRelease                      // Button release callback (end input)
+      );
+    });
+    //#endregion
   }
 
+  //#region ------------------------------------- ON-SCREEN BUTTON ACTIONS
 
-
+  // Invokes the "tick" operation in the `Play` scene's game manager.
+  // Saves game state, creating a continuous auto-save.
   tick() {
     const playScene = this.scene.get("playScene")
     if (playScene instanceof Play ){
@@ -86,18 +135,23 @@ export class UI extends Phaser.Scene {
     this.save();
   }
 
+  // Saves the game state
   save() {
     const playScene = this.scene.get("playScene")
     if(playScene instanceof Play){ playScene.gameManager.save()};
   }
 
+  // Performs the undo operation
   undo() {
     const playScene = this.scene.get("playScene")
     if(playScene instanceof Play) { playScene.gameManager.timeLine.undo()};
   }
 
+  // Performs the redo operation
   redo() {
     const playScene = this.scene.get("playScene")
     if (playScene instanceof Play){ playScene.gameManager.timeLine.redo()};
   }
+
+  //#endregion
 }
