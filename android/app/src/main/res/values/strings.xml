@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">121-final-team-2</string>
+    <string name="title_activity_main">121-final-team-2</string>
+    <string name="package_name">team2.final.app</string>
+    <string name="custom_url_scheme">team2.final.app</string>
+</resources>
