@@ -1,12 +1,17 @@
 import { globalConstants } from "../utils/globalConsts";
+import { Localization } from "../utils/localization";
+import en from "../locales/en.json" assert {type: 'json'};
 
 export class Menu extends Phaser.Scene {
+    localization: Localization;
     constructor() {
         super('menuScene')
     }
     create() {
         // running checks
         console.log('%cMENU SCENE :^)', globalConstants.testColor)
+        // localization -- language switcher
+        this.localization = new Localization(en);
 
         const saveSlotCount = 3;
 
@@ -21,8 +26,17 @@ export class Menu extends Phaser.Scene {
                 this.deleteSave(i)
             })
         }
-    }
 
+        this.constructButton(globalConstants.tileSize * 3, 40, 12, 1, this.localization.translate("english"), ()=>{
+            this.localization.switchLanguage("en");
+        })
+        this.constructButton(globalConstants.tileSize * 4, 40, 12, 1, this.localization.translate("arabic"), ()=>{
+            this.localization.switchLanguage("abr");
+        })
+        this.constructButton(globalConstants.tileSize * 5, 40, 12, 1, this.localization.translate("korean"), ()=>{
+            this.localization.switchLanguage("kr");
+        })
+    }
 
     deleteSave(fileNum: number){
         const fileName = "Slot:" + fileNum.toString()
@@ -36,7 +50,8 @@ export class Menu extends Phaser.Scene {
             localStorage.setItem(fileName, JSON.stringify(globalConstants.defaultSaveData))
         }
         this.scene.start('playScene', {
-            SAVE_NAME: fileName
+            SAVE_NAME: fileName,
+            LOCALIZATION: this.localization
         })
     }
 

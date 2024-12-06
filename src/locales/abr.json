@@ -1,0 +1,12 @@
+{
+    "menu.new_game": "لعبة جديدة",
+    "menu.load_game": "تحميل اللعبة",
+    "saveGame.slot_1": "اللعبة المحفوظة 1",
+    "saveGame.slot_2": "اللعبة المحفوظة 2",
+    "saveGame.slot_3": "اللعبة المحفوظة 3",
+    "english": "English",
+    "arabic": "العربية",
+    "korean": "한국어",
+    "gameplay.pause": "اللعبة متوقفة مؤقتًا",
+    "gameplay.play_scene": "مشهد اللعب"
+}
