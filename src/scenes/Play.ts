@@ -1,6 +1,5 @@
 import { GameManager } from "../managers/GameManager"
 import { globalConstants } from "../utils/globalConsts"
-import { parseDSL } from "../utils/parseDSL"
 import { UI } from "./UI"
 
 
@@ -26,9 +25,12 @@ export class Play extends Phaser.Scene {
         console.log(`SAVE NAME = ${this.SAVE_NAME}`)
 
         const uiScene = this.scene.get('uiScene')
-        uiScene instanceof UI && uiScene.displayPlayUI()
-
+        if ( uiScene instanceof UI){
+            uiScene.displayPlayUI()
+        }
         // Add grid and player to the scene
+        // const addedOffset = this.TILE_SIZE *
+
         this.gameManager = new GameManager(this, globalConstants.worldDimensions, this.TILE_SIZE, this.SAVE_NAME)
         this.cameras.main.centerOn(
             globalConstants.centerX - this.TILE_SIZE,

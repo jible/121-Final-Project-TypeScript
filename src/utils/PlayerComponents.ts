@@ -6,6 +6,7 @@ import { GameManager } from "../managers/GameManager"
 import { World } from "../prefabs/World"
 
 import Phaser from "phaser"
+import { InputHandler } from "./inputHandler"
 
 export function initializePlayerState(player: Player) {
     const stateArray: State[] = [
@@ -21,18 +22,17 @@ export function initializePlayerState(player: Player) {
                     player.direction = direction
                     player.sm.changeState('walk')
                 }
-                if (keys.cursors && keys.cursors.left.isDown) {
+                if ((keys.cursors && keys.cursors.left.isDown) || InputHandler.left) {
                     readInput(new Vector(-1, 0))
-                    console.log("yuhhh")
-                } else if (keys.cursors && keys.cursors.down.isDown) {
+                } else if ((keys.cursors && keys.cursors.down.isDown) || InputHandler.down) {
                     readInput(new Vector(0, 1))
-                } else if (keys.cursors && keys.cursors.up.isDown) {
+                } else if ((keys.cursors && keys.cursors.up.isDown) || InputHandler.up) {
                     readInput(new Vector(0, -1))
-                } else if (keys.cursors && keys.cursors.right.isDown) {
+                } else if ((keys.cursors && keys.cursors.right.isDown) || InputHandler.right) {
                     readInput(new Vector(1, 0))
-                } else if (keys.space &&keys.space.isDown) {
+                } else if ((keys.space &&keys.space.isDown) || InputHandler.reap) {
                     player.sm.changeState('reap')
-                } else if (keys.eKey && keys.eKey.isDown) {
+                } else if ((keys.eKey && keys.eKey.isDown) || InputHandler.sow) {
                     player.sm.changeState('sow')
                 } else if (keys.gKey && Phaser.Input.Keyboard.JustDown(keys.gKey)) {
                     player.sm.changeState('dance')

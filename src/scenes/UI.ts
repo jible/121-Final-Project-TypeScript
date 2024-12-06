@@ -1,4 +1,5 @@
 import { globalConstants } from "../utils/globalConsts";
+import { InputHandler } from "../utils/inputHandler";
 import { Play } from "./Play";
 
 
@@ -36,7 +37,40 @@ export class UI extends Phaser.Scene {
     this.constructButton(10 * this.TILE_SIZE, this.TILE_SIZE, 10, 6, "r", () =>
       this.redo()
     );
+
+    // Up Button
+    const uiZoneHeight= globalConstants.uiZone.top;
+    this.constructButton(4 * this.TILE_SIZE, uiZoneHeight , 10, 6, "^", 
+      () =>InputHandler.up = true,
+      () =>InputHandler.up = false
+    );
+
+    this.constructButton(4 * this.TILE_SIZE, uiZoneHeight +(3 *this.TILE_SIZE), 10, 6, "_", 
+      () => InputHandler.down = true
+    , () => InputHandler.down = false
+    );
+    
+    this.constructButton(1 * this.TILE_SIZE,uiZoneHeight +(3 *this.TILE_SIZE), 10, 6, "<", 
+      () => InputHandler.left = true
+    , () => InputHandler.left = false
+    );
+
+    this.constructButton(7 * this.TILE_SIZE, uiZoneHeight +(3 *this.TILE_SIZE), 10, 6, ">", 
+      () => InputHandler.right = true
+    , () => InputHandler.right = false
+    );
+
+    this.constructButton(11 * this.TILE_SIZE, uiZoneHeight , 10, 6, "}", 
+      () => InputHandler.reap = true
+    , () => InputHandler.reap = false
+    );
+
+    this.constructButton(11 * this.TILE_SIZE, uiZoneHeight +(3 *this.TILE_SIZE), 10, 6, "{", 
+      () => InputHandler.sow = true
+    , () => InputHandler.sow = false
+    );
   }
+
 
   constructButton(
     x: number,
@@ -44,7 +78,8 @@ export class UI extends Phaser.Scene {
     textSize: number,
     padding: number,
     text: string = "default text",
-    result: Function
+    result: Function,
+    secondResult?: Function
   ) {
     const content = this.add.text(x + padding / 2, y + padding / 2, text, {
       fontSize: `${textSize - 2}px`,
@@ -64,6 +99,10 @@ export class UI extends Phaser.Scene {
 
     const button = { content, UIBox };
     UIBox.setInteractive().on("pointerdown", result);
+
+    if (secondResult){
+      UIBox.setInteractive().on("pointerup", secondResult);
+    }
 
     return button;
   }

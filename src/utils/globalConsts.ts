@@ -1,11 +1,12 @@
 import Phaser from "phaser";
 
 const tileSize = 8;
-const worldPadding = 2;
+const worldPadding = 4;
 const worldDimensions = { width: 12, height: 8 };
+const uiZone = { width: 12, height: 5, top: tileSize * worldDimensions.height + tileSize * 2 + tileSize * worldPadding};
 const gameDimensions = {
     width: tileSize * worldDimensions.width + tileSize * 2,
-    height: tileSize * worldDimensions.height + tileSize * 3 + tileSize * worldPadding,
+    height: tileSize * worldDimensions.height + tileSize * 3 + tileSize * worldPadding + uiZone.height * tileSize,
 }
 
 
@@ -28,6 +29,7 @@ export const keys: KeysObject = {
 
 
 export const globalConstants = {
+    uiZone: uiZone,
     tileSize: tileSize,
     worldPadding: worldPadding,
     worldDimensions : worldDimensions,
