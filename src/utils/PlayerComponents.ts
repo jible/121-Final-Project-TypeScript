@@ -1,12 +1,22 @@
-import { Vector } from "./Vector"
-import { Player } from "../prefabs/Player"
-import { keys } from "./globalConsts"
-import { State } from "./StateMachine"
-import { GameManager } from "../managers/GameManager"
-import { World } from "../prefabs/World"
+//#region --------------------------------------- IMPORTS
 
+// UTILITIES
+import { Vector } from "./Vector"
+import { InputHandler } from "./InputHandler"
+import { keys } from "./GlobalConsts"
+import { State } from "./StateMachine"
+
+// PREFABS
+import { World } from "../prefabs/World"
+import { Player } from "../prefabs/Player"
+
+// ELSE
+import { GameManager } from "../managers/GameManager"
 import Phaser from "phaser"
-import { InputHandler } from "./inputHandler"
+
+//#endregion
+
+//#region --------------------------------------- FUNCTIONS
 
 export function initializePlayerState(player: Player) {
     const stateArray: State[] = [
@@ -22,6 +32,7 @@ export function initializePlayerState(player: Player) {
                     player.direction = direction
                     player.sm.changeState('walk')
                 }
+                
                 if ((keys.cursors && keys.cursors.left.isDown) || InputHandler.left) {
                     readInput(new Vector(-1, 0))
                 } else if ((keys.cursors && keys.cursors.down.isDown) || InputHandler.down) {
@@ -42,6 +53,7 @@ export function initializePlayerState(player: Player) {
         {
             name: 'walk',
             enter() {
+                // Start walk animation and movement
                 player.play('player-walk')
                 player.moveComp.startMoving(() => {
                     document.dispatchEvent(player.gameManager.worldUpdated)
@@ -49,14 +61,15 @@ export function initializePlayerState(player: Player) {
                 })
             },
             exit() {},
-            update(time, delta) {
+            update(time: number, delta: number) {
+                // Update movement component
                 player.moveComp.update(time, delta)
             }
         },
         {
             name: 'reap',
             enter() {
-                // play animation then do function on callback
+                // Play 'reap' animation and remove plant
                 player.playAnimation('player-reap', () => {
                     if (player.gameManager.plantManager.removePlant(player.position)) {
                         document.dispatchEvent(player.gameManager.worldUpdated)
@@ -70,7 +83,7 @@ export function initializePlayerState(player: Player) {
         {
             name: 'sow',
             enter() {
-                // play animation then do function on callback
+                // Play 'sow' animation and plant a seed
                 player.playAnimation('player-sow', () => {
                     if (player.gameManager.plantManager.addPlant(player.position)) {
                         document.dispatchEvent(player.gameManager.worldUpdated)
@@ -84,7 +97,7 @@ export function initializePlayerState(player: Player) {
         {
             name: 'dance',
             enter() {
-                // play animation then do function on callback
+                // Play 'dance' animation
                 player.playAnimation('player-dance', () => {})
             },
             exit() {},
@@ -99,9 +112,14 @@ export function initializePlayerState(player: Player) {
     return stateArray
 }
 
+//#endregion
+
+//#region --------------------------------------- CLASSES
+
 // Base class for player components
 export class Componenet {
     parent: Player;
+
     constructor(parent : Player) {
         this.parent = parent
     }
@@ -113,22 +131,26 @@ export class MoveComp extends Componenet {
     startGridPosition: Vector;
     trueTargetPosition: Vector;
     speedVector: Vector; 
-    callback: (() => void) | null; // Callback can be a function or null
+    callback: (() => void) | null;
     walking: boolean;
     gameManager: GameManager;
     world: World;
 
     constructor(parent: Player) {
         super(parent)
-        this.targetGridPosition = new Vector(0, 0)
-        this.startGridPosition = new Vector(0, 0)
-        this.trueTargetPosition = new Vector(0, 0)
+        this.targetGridPosition = this.startGridPosition = this.trueTargetPosition = new Vector(0, 0)
         this.callback = null
         this.gameManager = parent.gameManager
         this.world = this.gameManager.world
         this.walking = false
     }
 
+    // Updates the movement component during the game loop.
+    update(time: number, delta: number): void {
+        this.moveRoutine(time, delta)
+    }
+
+    // Starts moving the player toward a target position.
     startMoving(callback: () => void): void {
         this.callback = callback
         this.speedVector = this.parent.direction.mult(this.parent.speed)
@@ -143,11 +165,8 @@ export class MoveComp extends Componenet {
         }
     }
 
-    update(time: number, delta: number) {
-        this.moveRoutine(time, delta)
-    }
-
-    moveRoutine(time: number, delta: number) {
+    // Handles movement logic, snapping position to grid when necessary.
+    moveRoutine(time: number, delta: number): void {
         // Handle the X-axis
         this.parent.x += (this.speedVector.x * delta) / 5;
         if (
@@ -185,3 +204,5 @@ export class MoveComp extends Componenet {
         }
     }
 }
+
+//#endregion

@@ -1,8 +1,18 @@
+//#region --------------------------------------- IMPORTS
+
+// UTILITIES
 import { Vector } from "../utils/Vector.ts"
+import { globalConstants } from "../utils/GlobalConsts";
+
+// MANAGERS
 import { GameManager } from "../managers/GameManager"
-import {World} from "./World.ts"
+
+// ELSE
+import { World } from "./World.ts"
+
 import Phaser from "phaser"
-import { globalConstants } from "../utils/globalConsts";
+
+//#endregion
 
 export class GridObj extends Phaser.GameObjects.Sprite {
     gameManager:GameManager

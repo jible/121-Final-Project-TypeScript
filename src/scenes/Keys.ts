@@ -1,4 +1,8 @@
-import { globalConstants, keys } from "../utils/globalConsts";
+//#region --------------------------------------- IMPORTS
+
+import { globalConstants, keys } from "../utils/GlobalConsts";
+
+//#endregion
 
 export class Keys extends Phaser.Scene {
     constructor() {

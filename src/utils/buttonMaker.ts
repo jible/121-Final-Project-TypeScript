@@ -1,23 +1,40 @@
-import { globalConstants } from "../utils/globalConsts";
+//#region --------------------------------------- IMPORTS AND INITS
+
+import { globalConstants } from "./GlobalConsts";
 import Phaser from "phaser";
 
+// Use the game's tile size from global constants
 const tileSize = globalConstants.tileSize;
+
+//#endregion
 
 export function constructTextButton(
     scene: Phaser.Scene,
+    // positioning
     x: number,
     y: number,
+    // text formatting
     textSize: number,
     padding: number,
     text: string = "default text",
-    downResult: (pointer: Phaser.Input.Pointer) => void, // Specific function type for pointerdown
-    upResult?: (pointer: Phaser.Input.Pointer) => void // Specific function type for pointerup
+    // asscosciated buttons
+    downResult: (pointer: Phaser.Input.Pointer) => void, // Callback for pointerdown event
+    upResult?: (pointer: Phaser.Input.Pointer) => void // Optional callback for pointerup event
 ) {
-    const content = scene.add.text(x + padding / 2, y + padding / 2, text, {
-        fontSize: `${textSize - 2}px`,
-        lineSpacing: 0,
-    });
+    // Create text content for the button
+    const content: Phaser.GameObjects.Text = scene.add.text(
+        x + padding / 2,
+        y + padding / 2,
+        text,
+        {
+            fontSize: `${textSize - 2}px`, // Adjust the textSize to make it fit better
+            lineSpacing: 0,
+        }
+    );
     content.height = textSize;
+    content.setOrigin(0).setZ(100).setDepth(1);
+
+    // Create box as button frame
     const UIBox = scene.add.rectangle(
         x,
         y,
@@ -25,17 +42,14 @@ export function constructTextButton(
         content.height + padding,
         0xff0000
     );
-
-    content.setOrigin(0).setZ(100).setDepth(1);
     UIBox.setOrigin(0);
-
-    const button = { content, UIBox };
-    UIBox.setInteractive().on("pointerdown", downResult);
-
+    UIBox.setInteractive().on("pointerdown", downResult)
     if (upResult) {
-        UIBox.setInteractive().on("pointerup", upResult);
+        UIBox.setInteractive().on("pointerup", upResult)
     }
 
+    // Assemble and return button
+    const button = { content, UIBox };
     return button;
 }
 

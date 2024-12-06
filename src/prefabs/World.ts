@@ -1,9 +1,17 @@
+//#region --------------------------------------- IMPORTS
+
+// UTILITIES
 import { Vector } from "../utils/Vector.ts";
+import { bitWiseHelper } from "../utils/BitHelpers.ts";
+import { Clock } from "../utils/Clock.ts"
+import { worldPresets } from "../utils/ParseDSL.ts";
+
+// ELSE
 import { GameManager } from "../managers/GameManager";
 import { Plant } from "../prefabs/Plants.ts";
-import { bitWiseHelper } from "../utils/BitHelpers.ts";
-import { Clock } from "../utils/clock.ts"
-import { worldPresets } from "../utils/parseDSL.ts";
+
+//#endregion
+
 export class Tile {
     gameManager: GameManager
     plant: Plant|null
@@ -177,7 +185,6 @@ export class World {
         const currentDay = this.gameManager.time.day
         const weather = worldPresets.days[currentDay]
         if (weather == "sunny"){
-            console.log("making it a sunny day")
             for (let x = 0; x < this.gridSize.width; x++) {
                 for (let y = 0; y < this.gridSize.height; y++) {
                     const tile = this.getTile(new Vector(x, y))
@@ -197,7 +204,6 @@ export class World {
                     tile.sunLvl = Math.floor(Math.random() * 2)
                 }
             }
-            console.log("making it a rainyday")
             return
         } else if ( worldPresets.weatherRandom){
             for (let x = 0; x < this.gridSize.width; x++) {

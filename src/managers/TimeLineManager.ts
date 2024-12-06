@@ -1,4 +1,9 @@
+//#region --------------------------------------- IMPORTS
+
 import {GameManager} from "./GameManager.ts"
+
+//#endregion
+
 export class worldTimeLine {
     currentAction: Uint16Array
     formerStates: Uint16Array[]

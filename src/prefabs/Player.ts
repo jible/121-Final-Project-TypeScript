@@ -1,9 +1,15 @@
+//#region --------------------------------------- IMPORTS
+
+// UTILITIES
 import { Vector } from "../utils/Vector"
-import { GridObj } from "./GridObj"
-import { GameManager } from "../managers/GameManager"
 import { MoveComp, initializePlayerState} from "../utils/PlayerComponents"
 import { State, StateMachine } from "../utils/StateMachine"
 
+// ELSE
+import { GridObj } from "./GridObj"
+import { GameManager } from "../managers/GameManager"
+
+//#endregion
 
 export class Player extends GridObj {
     direction: Vector

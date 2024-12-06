@@ -1,7 +1,14 @@
-import { GameManager } from "../managers/GameManager";
-import { globalConstants } from "../utils/globalConsts";
+//#region --------------------------------------- IMPORTS
+
+// UTILITIES
+import { globalConstants } from "../utils/GlobalConsts";
+import { Localization } from "../utils/Localization";
+
+// ELSE
 import { UI } from "./UI";
-import { Localization } from "../utils/localization";
+import { GameManager } from "../managers/GameManager";
+
+//#endregion
 
 interface PlayInitData {
     SAVE_NAME: string;
@@ -29,8 +36,8 @@ export class Play extends Phaser.Scene {
     create() {
         // Initialize the world and player
         console.log('%cPLAY SCENE :^)', globalConstants.testColor);
-        console.log(this.localization.translate("gameplay.play_scene"));
-        console.log(`SAVE NAME = ${this.SAVE_NAME}`);
+
+        this.localization.translate("gameplay.play_scene")
 
         const uiScene = this.scene.get('uiScene');
         if (uiScene instanceof UI) {

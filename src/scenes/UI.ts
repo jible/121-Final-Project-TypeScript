@@ -1,7 +1,12 @@
-import { globalConstants } from "../utils/globalConsts";
-import { InputHandler } from "../utils/inputHandler";
+//#region --------------------------------------- IMPORTS
+
+import { globalConstants } from "../utils/GlobalConsts";
+import { InputHandler } from "../utils/InputHandler";
+import { constructTextButton } from "../utils/ButtonMaker.ts"
+
 import { Play } from "./Play";
-import { constructTextButton } from "../utils/buttonMaker.ts"
+
+//#endregion
 
 export class UI extends Phaser.Scene {
   BUTTON_LAYER = 100;

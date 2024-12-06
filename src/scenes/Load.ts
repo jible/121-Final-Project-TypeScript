@@ -1,5 +1,9 @@
-import { globalConstants } from "../utils/globalConsts"
+//#region --------------------------------------- IMPORTS
+
+import { globalConstants } from "../utils/GlobalConsts"
 import Phaser from "phaser"
+
+//#endregion
 
 export class Load extends Phaser.Scene {
     constructor() {

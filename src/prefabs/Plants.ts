@@ -1,8 +1,15 @@
-import { GridObj } from "./GridObj";
-import { Vector } from "../utils/Vector.ts";
+//#region --------------------------------------- IMPORTS
+
+// MANAGERS
 import { GameManager } from "../managers/GameManager";
 import { PlantManager } from "../managers/PlantManager.ts";
 import { WinConManager } from "../managers/WinManager.ts";
+
+// ELSE
+import { GridObj } from "./GridObj";
+import { Vector } from "../utils/Vector.ts";
+
+//#endregion
 
 export class Plant extends GridObj {
   plantManager: PlantManager;

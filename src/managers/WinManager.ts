@@ -1,5 +1,10 @@
-import { worldPresets } from '../utils/parseDSL'
+//#region --------------------------------------- IMPORTS
+
+import { worldPresets } from '../utils/ParseDSL'
 import { GameManager } from './GameManager'
+
+//#endregion
+
 // When a plant is created, reaped, or had its growth level increased, it needs to be represented in this.totalPlants
 export class WinConManager {
     // If three or more plants are level three growth or above, the game is won.

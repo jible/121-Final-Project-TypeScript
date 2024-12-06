@@ -1,7 +1,12 @@
-import { constructTextButton } from "../utils/buttonMaker";
-import { globalConstants } from "../utils/globalConsts";
-import { Localization } from "../utils/localization";
+//#region --------------------------------------- IMPORTS
+
+import { constructTextButton } from "../utils/ButtonMaker";
+import { globalConstants } from "../utils/GlobalConsts";
+import { Localization } from "../utils/Localization";
+
 import en from "../locales/en.json" assert {type: 'json'};
+
+//#endregion
 
 export class Menu extends Phaser.Scene {
     localization: Localization;
