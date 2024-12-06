@@ -47,6 +47,35 @@ export class Load extends Phaser.Scene {
             startFrame: 12,
             endFrame: 14,
         })
+        
+        this.load.spritesheet('reapEffect', './assets/spritesheets/reapSpritesheet.png', {
+            frameWidth: 16,
+            frameHeight: 16,
+            startFrame: 0,
+            endFrame: -1,
+        })
+        this.load.spritesheet('upgradeEffect', './assets/spritesheets/upgradeSpritesheet.png', {
+            frameWidth: 16,
+            frameHeight: 16,
+            startFrame: 0,
+            endFrame: -1,
+        })
+        this.load.spritesheet('waterEffect', './assets/spritesheets/waterSpritesheet.png', {
+            frameWidth: 16,
+            frameHeight: 16,
+            startFrame: 0,
+            endFrame: -1,
+        })
+        this.load.spritesheet('sowEffect', './assets/spritesheets/sowSpritesheet.png', {
+            frameWidth: 16,
+            frameHeight: 16,
+            startFrame: 0,
+            endFrame: -1,
+        })
+
+        // load fonts
+        this.load.bitmapFont('pixelated', './assets/fonts/pixelated.png', 'assets/fonts/pixelated.xml');
+        // ex usage: this.add.bitmapText(100, 100, 'myFont', 'Hello Phaser!', 32);
     }
 
     create() {
@@ -105,6 +134,46 @@ export class Load extends Phaser.Scene {
                 end: 27,
             }),
             frameRate: 10,
+            repeat: 0,
+        })
+
+        this.anims.create({
+            key: 'reap-effect',
+            frames: this.anims.generateFrameNames('reapEffect', {
+                start: 24,
+                end: 27,
+            }),
+            frameRate: 20,
+            repeat: 0,
+        })
+
+        this.anims.create({
+            key: 'sow-effect',
+            frames: this.anims.generateFrameNames('sowEffect', {
+                start: 24,
+                end: 27,
+            }),
+            frameRate: 20,
+            repeat: 0,
+        })
+
+        this.anims.create({
+            key: 'upgrade-effect',
+            frames: this.anims.generateFrameNames('upgradeEffect', {
+                start: 24,
+                end: 27,
+            }),
+            frameRate: 20,
+            repeat: 0,
+        })
+
+        this.anims.create({
+            key: 'water-spritesheet',
+            frames: this.anims.generateFrameNames('waterEffect', {
+                start: 0,
+                end: -1,
+            }),
+            frameRate: 20,
             repeat: 0,
         })
     }
