@@ -129,7 +129,7 @@ export class MoveComp extends Componenet {
         this.walking = false
     }
 
-    startMoving(callback: any) {
+    startMoving(callback: () => void): void {
         this.callback = callback
         this.speedVector = this.parent.direction.mult(this.parent.speed)
         this.startGridPosition = this.parent.position.copy()

@@ -6,7 +6,7 @@ import { constructTextButton } from "../utils/buttonMaker.ts"
 export class UI extends Phaser.Scene {
   BUTTON_LAYER = 100;
   TILE_SIZE = globalConstants.tileSize;
-  SAVE_NAME: String;
+  SAVE_NAME: string;
 
   constructor() {
     super({ key: "uiScene", active: true });
