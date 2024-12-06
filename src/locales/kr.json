@@ -1,9 +1,7 @@
 {
     "menu.new_game": "새 게임",
     "menu.load_game": "게임 불러오기",
-    "saveGame.slot_1": "저장된 게임 1",
-    "saveGame.slot_2": "저장된 게임 2",
-    "saveGame.slot_3": "저장된 게임 3",
+    "saveGame": "저장된 게임",
     "english": "English",
     "arabic": "العربية",
     "korean": "한국어",

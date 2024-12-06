@@ -28,24 +28,24 @@ export class Menu extends Phaser.Scene {
             })
         }
 
-        this.constructButton(globalConstants.tileSize * 6, 50, 10, 3, this.localization.translate("english"), ()=>{
+        constructTextButton(this, globalConstants.tileSize * 6, 50, 10, 3, this.localization.translate("english"), ()=>{
             this.localization.switchLanguage("en");
         })
-        this.constructButton(globalConstants.tileSize * 6, 65, 10, 3, this.localization.translate("arabic"), ()=>{
+        constructTextButton(this, globalConstants.tileSize * 6, 65, 10, 3, this.localization.translate("arabic"), ()=>{
             this.localization.switchLanguage("abr");
         })
-        this.constructButton(globalConstants.tileSize * 6, 80, 10, 3, this.localization.translate("korean"), ()=>{
+        constructTextButton(this, globalConstants.tileSize * 6, 80, 10, 3, this.localization.translate("korean"), ()=>{
             this.localization.switchLanguage("kr");
         })
     }
 
     deleteSave(fileNum: number){
-        const fileName = "Slot:" + fileNum.toString()
+        const fileName = `${this.localization.translate("saveGame")}: ` + fileNum.toString()
         localStorage.removeItem(fileName);
     }
 
     loadSave(fileNum: number){
-        const fileName = "Slot:" + fileNum.toString()
+        const fileName = `${this.localization.translate("saveGame")}: ` + fileNum.toString()
         const file = localStorage.getItem(fileName)
         if ( !file ) {
             localStorage.setItem(fileName, JSON.stringify(globalConstants.defaultSaveData))

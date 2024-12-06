@@ -1,9 +1,11 @@
 import { GameManager } from "../managers/GameManager";
 import { globalConstants } from "../utils/globalConsts";
 import { UI } from "./UI";
+import { Localization } from "../utils/localization";
 
 interface PlayInitData {
     SAVE_NAME: string;
+    LOCALIZATION: Localization;
 }
 
 export class Play extends Phaser.Scene {

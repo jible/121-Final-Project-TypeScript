@@ -1,9 +1,7 @@
 {
     "menu.new_game": "New Game",
     "menu.load_game": "Load Game",
-    "saveGame.slot_1": "Saved Game 1",
-    "saveGame.slot_2": "Saved Game 2",
-    "saveGame.slot_3": "Saved Game 3",
+    "saveGame": "Saved Game",
     "english": "English",
     "arabic": "العربية",
     "korean": "한국어",
