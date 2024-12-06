@@ -27,13 +27,13 @@ export class Menu extends Phaser.Scene {
             })
         }
 
-        this.constructButton(globalConstants.tileSize * 3, 40, 12, 1, this.localization.translate("english"), ()=>{
+        this.constructButton(globalConstants.tileSize * 6, 50, 10, 3, this.localization.translate("english"), ()=>{
             this.localization.switchLanguage("en");
         })
-        this.constructButton(globalConstants.tileSize * 4, 40, 12, 1, this.localization.translate("arabic"), ()=>{
+        this.constructButton(globalConstants.tileSize * 6, 65, 10, 3, this.localization.translate("arabic"), ()=>{
             this.localization.switchLanguage("abr");
         })
-        this.constructButton(globalConstants.tileSize * 5, 40, 12, 1, this.localization.translate("korean"), ()=>{
+        this.constructButton(globalConstants.tileSize * 6, 80, 10, 3, this.localization.translate("korean"), ()=>{
             this.localization.switchLanguage("kr");
         })
     }
