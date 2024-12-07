@@ -19,6 +19,7 @@ export class GridObj extends Phaser.GameObjects.Sprite {
     world:World
     position:Vector
     tileSize:number
+    
     constructor(gameManager: GameManager, position: Vector, texture: string) {
         const trueX = position.x * gameManager.tileSize
         const trueY = position.y * gameManager.tileSize
@@ -33,6 +34,7 @@ export class GridObj extends Phaser.GameObjects.Sprite {
         this.tileSize = globalConstants.tileSize
     }
 
+    // Moves object to tile target (player)
     teleport(target: Vector) {
         if (!this.world.checkEnterable(target)) {
             return false
