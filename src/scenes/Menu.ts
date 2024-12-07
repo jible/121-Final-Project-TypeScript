@@ -1,29 +1,41 @@
-import { constructTextButton } from "../utils/buttonMaker";
-import { globalConstants } from "../utils/globalConsts";
-import { Localization } from "../utils/localization";
+//#region --------------------------------------- IMPORTS
+
+import { constructTextButton } from "../utils/ButtonMaker";
+import { globalConstants } from "../utils/GlobalConsts";
+import { Localization } from "../utils/Localization";
+
 import en from "../locales/en.json" assert {type: 'json'};
 
+//#endregion
+
+// The `Menu` scene allows users to:
+// Load or delete from save slots and switch the game language.
 export class Menu extends Phaser.Scene {
-    localization: Localization;
+    localization: Localization
+    TEXT_SIZE: number = 10
+    PADDING: number = 6
+
     constructor() {
         super('menuScene')
     }
+
     create() {
         // running checks
         console.log('%cMENU SCENE :^)', globalConstants.testColor)
-        // localization -- language switcher
+
         this.localization = new Localization(en);
 
         const saveSlotCount = 3;
 
-        const LoadFileHeight = 2 * globalConstants.tileSize;
+        const loadFileHeight = 2 * globalConstants.tileSize;
         const deleteFileHeight = 4 * globalConstants.tileSize;
+
         for (let i = 1; i <= saveSlotCount; i++){
             const x = i * (globalConstants.tileSize * 3) ;
-            constructTextButton( this,x, LoadFileHeight , 10, 6,  (i).toString(), ()=>{
+            constructTextButton( this,x, loadFileHeight , this.TEXT_SIZE, this.PADDING,  (i).toString(), ()=>{
                 this.loadSave(i)
             })
-            constructTextButton( this, x, deleteFileHeight, 10 ,6,  "X", () => {
+            constructTextButton( this, x, deleteFileHeight, this.TEXT_SIZE ,this.PADDING,  "X", () => {
                 this.deleteSave(i)
             })
         }
@@ -38,6 +50,8 @@ export class Menu extends Phaser.Scene {
             this.localization.switchLanguage("kr");
         })
     }
+
+    //#region------------------------------------ SAVE FILE FUNCTIONS
 
     deleteSave(fileNum: number){
         const fileName = `${this.localization.translate("saveGame")}: ` + fileNum.toString()
@@ -56,4 +70,5 @@ export class Menu extends Phaser.Scene {
         })
     }
 
+    //#endregion
 }

@@ -1,38 +1,56 @@
-import { GridObj } from "./GridObj";
-import { Vector } from "../utils/Vector.ts";
+//#region --------------------------------------- IMPORTS
+
+// MANAGERS
 import { GameManager } from "../managers/GameManager";
-import { PlantManager } from "../managers/PlantManager.ts";
-import { WinConManager } from "../managers/WinManager.ts";
+import { PlantManager } from "../managers/PlantManager";
+import { WinConManager } from "../managers/WinManager";
+
+// ELSE
+import { GridObj } from "./GridObj";
+import { Vector } from "../utils/Vector";
+
+//#endregion
 
 export class Plant extends GridObj {
-  plantManager: PlantManager;
-  // CAN'T USE OBJECT FOR SOME REASON
-  plantAttributes;
-  species: number;
-  growthLevel: number;
-  WATER_RULE: number;
-  SUN_RULE: number;
-  NEIGHBOR_RULE: number;
+  plantManager: PlantManager
+  plantAttributes: {
+    sprite: string
+    waterReq: number
+    sunReq: number
+    neighborReq: number
+  }
+  species: number
+  growthLevel: number
+  WATER_RULE: number
+  SUN_RULE: number
+  NEIGHBOR_RULE: number
+
+
   constructor(gameManager: GameManager, position: Vector, species = 1) {
-    const plantManager = gameManager.plantManager;
+    const plantManager = gameManager.plantManager
 
-    super(gameManager, position, plantManager.plantAttributes[species].sprite!);
-    this.plantManager = plantManager;
-    this.plantAttributes = this.plantManager.plantAttributes[species];
-    this.species = species;
-    this.growthLevel = 0;
+    super(gameManager, position, plantManager.plantAttributes[species].sprite!)
+    this.plantManager = plantManager
+    this.plantAttributes = this.plantManager.plantAttributes[species]
+    this.species = species
+    this.growthLevel = 0
 
-    this.WATER_RULE = this.plantAttributes.waterReq!;
-    this.SUN_RULE = this.plantAttributes.sunReq!;
-    this.NEIGHBOR_RULE = this.plantAttributes.neighborReq!;
+    this.WATER_RULE = this.plantAttributes.waterReq!
+    this.SUN_RULE = this.plantAttributes.sunReq!
+    this.NEIGHBOR_RULE = this.plantAttributes.neighborReq!
   }
 
-  setGrowth(level: number) {
+  //#region ------------------------------------- GROW FUNCTIONS
+
+  // Sets the growth level of the plant and updates its appearance.
+  setGrowth(level: number): void {
     this.growthLevel = level;
     this.setTint(this.tint + 0xffb3b3 * level);
   }
 
-  grow() {
+  // Attempts to grow the plant if growth conditions are met.
+  // Deducts the required water level from the tile upon successful growth.
+  grow(): void {
     if (this.checkCanGrow()) {
       this.growthLevel++;
       this.setTint(this.tint + 0xffb3b3);
@@ -41,23 +59,30 @@ export class Plant extends GridObj {
     }
   }
 
-  tick() {
-    this.grow();
+  // Called every game tick to update the plant's state.
+  tick(): void {
+    this.grow()
   }
 
-  checkCanGrow() {
+  //#endregion
+
+  //#region ------------------------------------- DETECT SURROUNDINGS
+
+  // Checks whether the plant can grow based on water, sunlight, adjacency, and max growth rules.
+  checkCanGrow(): boolean {
     const tile = this.world.getTile(this.position);
     const waterReq = tile.waterLvl >= this.WATER_RULE;
     const sunReq = tile.sunLvl >= this.SUN_RULE;
     const adjReq = this.checkPlantNeighbors() < this.NEIGHBOR_RULE;
     return (
-      waterReq && //check water
-      sunReq && //check sun
+      waterReq &&
+      sunReq &&
       adjReq &&
       this.growthLevel < WinConManager.WINNING_GROWTH_LEVEL
     );
   }
 
+  // Logs the plant's growth requirements and its tile conditions to the console.
   logCheckCanGrow() {
     const tile = this.world.getTile(this.position);
 
@@ -74,6 +99,7 @@ export class Plant extends GridObj {
     console.log("Plant Neighbors: " + this.checkPlantNeighbors());
   }
 
+  // Checks the number of adjacent tiles containing other plants.
   checkPlantNeighbors() {
     let plantCount = 0;
     for (let dX = -1; dX < 1; dX++) {
@@ -90,4 +116,6 @@ export class Plant extends GridObj {
     }
     return plantCount;
   }
+
+  //#endregion
 }

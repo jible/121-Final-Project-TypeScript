@@ -1,5 +1,9 @@
-import { globalConstants } from "../utils/globalConsts"
+//#region --------------------------------------- IMPORTS
+
+import { globalConstants } from "../utils/GlobalConsts"
 import Phaser from "phaser"
+
+//#endregion
 
 export class Load extends Phaser.Scene {
     constructor() {
@@ -7,174 +11,74 @@ export class Load extends Phaser.Scene {
     }
 
     preload() {
-        this.load.spritesheet('grass-spritesheet', 'assets/spritesheets/grassSpritesheet.png', {
-            frameWidth: 8,
-            frameHeight: 8,
-            startFrame: 0,
-        })
-        this.load.spritesheet('player', 'assets/spritesheets/playerSpritesheet.png', {
-            frameWidth: 8,
-            frameHeight: 8,
-            startFrame: 0,
-        })
-        this.load.spritesheet('marigold', 'assets/spritesheets/flowerSpritesheet.png', {
-            frameWidth: 8,
-            frameHeight: 8,
-            startFrame: 0,
-            endFrame: 2,
-        })
-        this.load.spritesheet('lily', 'assets/spritesheets/flowerSpritesheet.png', {
-            frameWidth: 8,
-            frameHeight: 8,
-            startFrame: 3,
-            endFrame: 5,
-        })
-        this.load.spritesheet('sunflower', './assets/spritesheets/flowerSpritesheet.png', {
-            frameWidth: 8,
-            frameHeight: 8,
-            startFrame: 6,
-            endFrame: 8,
-        })
-        this.load.spritesheet('daisy', './assets/spritesheets/flowerSpritesheet.png', {
-            frameWidth: 8,
-            frameHeight: 8,
-            startFrame: 9,
-            endFrame: 11,
-        })
-        this.load.spritesheet('tulip', './assets/spritesheets/flowerSpritesheet.png', {
-            frameWidth: 8,
-            frameHeight: 8, 
-            startFrame: 12,
-            endFrame: 14,
-        })
-        
-        this.load.spritesheet('reapEffect', './assets/spritesheets/reapSpritesheet.png', {
-            frameWidth: 16,
-            frameHeight: 16,
-            startFrame: 0,
-            endFrame: -1,
-        })
-        this.load.spritesheet('upgradeEffect', './assets/spritesheets/upgradeSpritesheet.png', {
-            frameWidth: 16,
-            frameHeight: 16,
-            startFrame: 0,
-            endFrame: -1,
-        })
-        this.load.spritesheet('waterEffect', './assets/spritesheets/waterSpritesheet.png', {
-            frameWidth: 16,
-            frameHeight: 16,
-            startFrame: 0,
-            endFrame: -1,
-        })
-        this.load.spritesheet('sowEffect', './assets/spritesheets/sowSpritesheet.png', {
-            frameWidth: 16,
-            frameHeight: 16,
-            startFrame: 0,
-            endFrame: -1,
-        })
+        // Load spritesheet helper function
+        const loadSpritesheet = (
+            key: string,
+            path: string,
+            frameWidth: number,
+            frameHeight: number,
+            startFrame: number = 0,
+            endFrame: number = -1
+        ): void => {
+            this.load.spritesheet(key, path, {
+                frameWidth,
+                frameHeight,
+                startFrame,
+                endFrame,
+            })
+        }
+
+        // Preload spritesheets for various assets
+        loadSpritesheet('grass-spritesheet', 'assets/spritesheets/grassSpritesheet.png', 8, 8)
+        loadSpritesheet('player', 'assets/spritesheets/playerSpritesheet.png', 8, 8)
+        loadSpritesheet('marigold', 'assets/spritesheets/flowerSpritesheet.png', 8, 8, 0, 2)
+        loadSpritesheet('lily', 'assets/spritesheets/flowerSpritesheet.png', 8, 8, 3, 5)
+        loadSpritesheet('sunflower', 'assets/spritesheets/flowerSpritesheet.png', 8, 8, 6, 8)
+        loadSpritesheet('daisy', 'assets/spritesheets/flowerSpritesheet.png', 8, 8, 9, 11)
+        loadSpritesheet('tulip', 'assets/spritesheets/flowerSpritesheet.png', 8, 8, 12, 14)
+
+        loadSpritesheet('reapEffect', './assets/spritesheets/reapSpritesheet.png', 16, 16)
+        loadSpritesheet('upgradeEffect', './assets/spritesheets/upgradeSpritesheet.png', 16, 16)
+        loadSpritesheet('waterEffect', './assets/spritesheets/waterSpritesheet.png', 16, 16)
+        loadSpritesheet('sowEffect', './assets/spritesheets/sowSpritesheet.png', 16, 16)
 
         // load fonts
-        this.load.bitmapFont('pixelated', './assets/fonts/pixelated.png', 'assets/fonts/pixelated.xml');
-        // ex usage: this.add.bitmapText(100, 100, 'myFont', 'Hello Phaser!', 32);
+        this.load.bitmapFont('pixelated', './assets/fonts/pixelated.png', 'assets/fonts/pixelated.xml')
+        // ex usage: this.add.bitmapText(100, 100, 'myFont', 'Hello Phaser!')
     }
 
     create() {
         // running checks
         console.log('%cLOAD SCENE :^)', globalConstants.testColor)
 
+        // Create animation helper function
+        const createAnimation = (
+            key: string,
+            spriteKey: string,
+            startFrame: number,
+            endFrame: number,
+            frameRate: number,
+            repeat: number
+        ): void => {
+            this.anims.create({
+                key,
+                frames: this.anims.generateFrameNames(spriteKey, { start: startFrame, end: endFrame }),
+                frameRate,
+                repeat,
+            });
+        };
+
+        // Define and create animations
+        createAnimation('player-idle', 'player', 0, 3, 5, -1)
+        createAnimation('player-walk', 'player', 8, 11, 10, 0)
+        createAnimation('player-dance', 'player', 16, 19, 5, -1)
+        createAnimation('player-reap', 'player', 32, 39, 10, 0)
+        createAnimation('player-sow', 'player', 32, 39, 10, 0)
+        createAnimation('reap-effect', 'reapEffect', 0, 20, 20, 0)
+        createAnimation('sow-effect', 'sowEffect', 0, 5, 20, 0)
+        createAnimation('upgrade-effect', 'upgradeEffect', 0, 8, 20, 0)
+        createAnimation('water-spritesheet', 'waterEffect', 0, 13, 20, 0)
+
         this.scene.start('menuScene')
-
-        function getFrames(frameNum: number[], sheetKey:string) {
-            return frameNum.map(num => ({ key: sheetKey, frame: num }))
-        }
-
-        this.anims.create({
-            key: 'player-dance',
-            frames: this.anims.generateFrameNames('player', {
-                start: 16,
-                end: 19,
-            }),
-            frameRate: 5,
-            repeat: -1,
-        })
-
-        this.anims.create({
-            key: 'player-idle',
-            frames: this.anims.generateFrameNames('player', {
-                start: 0,
-                end: 3,
-            }),
-            frameRate: 5,
-            repeat: -1,
-        })
-
-        const walkFrameNum = [8, 9, 10, 11, 16, 17, 18, 19]
-
-        this.anims.create({
-            key: 'player-walk',
-            frames: getFrames(walkFrameNum, 'player'),
-            frameRate: 10,
-            repeat: 0,
-        })
-
-        this.anims.create({
-            key: 'player-reap',
-            frames: this.anims.generateFrameNames('player', {
-                start: 32,
-                end: 39,
-            }),
-            frameRate: 10,
-            repeat: 0,
-        })
-
-        this.anims.create({
-            key: 'player-sow',
-            frames: this.anims.generateFrameNames('player', {
-                start: 24,
-                end: 31,
-            }),
-            frameRate: 10,
-            repeat: 0,
-        })
-
-        this.anims.create({
-            key: 'reap-effect',
-            frames: this.anims.generateFrameNames('reapEffect', {
-                start: 24,
-                end: 27,
-            }),
-            frameRate: 20,
-            repeat: 0,
-        })
-
-        this.anims.create({
-            key: 'sow-effect',
-            frames: this.anims.generateFrameNames('sowEffect', {
-                start: 24,
-                end: 27,
-            }),
-            frameRate: 20,
-            repeat: 0,
-        })
-
-        this.anims.create({
-            key: 'upgrade-effect',
-            frames: this.anims.generateFrameNames('upgradeEffect', {
-                start: 24,
-                end: 27,
-            }),
-            frameRate: 20,
-            repeat: 0,
-        })
-
-        this.anims.create({
-            key: 'water-spritesheet',
-            frames: this.anims.generateFrameNames('waterEffect', {
-                start: 0,
-                end: -1,
-            }),
-            frameRate: 20,
-            repeat: 0,
-        })
     }
 }

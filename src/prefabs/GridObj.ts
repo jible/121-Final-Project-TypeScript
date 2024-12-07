@@ -1,14 +1,25 @@
-import { Vector } from "../utils/Vector.ts"
+//#region --------------------------------------- IMPORTS
+
+// UTILITIES
+import { Vector } from "../utils/Vector"
+import { globalConstants } from "../utils/GlobalConsts";
+
+// MANAGERS
 import { GameManager } from "../managers/GameManager"
-import {World} from "./World.ts"
+
+// ELSE
+import { World } from "./World"
+
 import Phaser from "phaser"
-import { globalConstants } from "../utils/globalConsts";
+
+//#endregion
 
 export class GridObj extends Phaser.GameObjects.Sprite {
     gameManager:GameManager
     world:World
     position:Vector
     tileSize:number
+    
     constructor(gameManager: GameManager, position: Vector, texture: string) {
         const trueX = position.x * gameManager.tileSize
         const trueY = position.y * gameManager.tileSize
@@ -23,6 +34,7 @@ export class GridObj extends Phaser.GameObjects.Sprite {
         this.tileSize = globalConstants.tileSize
     }
 
+    // Moves object to tile target (player)
     teleport(target: Vector) {
         if (!this.world.checkEnterable(target)) {
             return false

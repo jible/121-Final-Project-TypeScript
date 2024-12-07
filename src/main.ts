@@ -1,11 +1,17 @@
-import { globalConstants } from './utils/globalConsts';
+//#region --------------------------------------- IMPORTS
+
+// SCENES
 import { Load } from './scenes/Load';
 import { Menu } from './scenes/Menu';
 import { Play } from './scenes/Play';
-
-import { Game, Types } from "phaser";
 import { UI } from './scenes/UI';
 import { Keys } from './scenes/Keys';
+
+// ELSE
+import { globalConstants } from './utils/GlobalConsts';
+import { Game, Types } from "phaser";
+
+//#endregion
 
 //  Find out more information about the Game Config at:
 //  https://newdocs.phaser.io/docs/3.70.0/Phaser.Types.Core.GameConfig

@@ -1,4 +1,8 @@
-import { globalConstants, keys } from "../utils/globalConsts";
+//#region --------------------------------------- IMPORTS
+
+import { globalConstants, keys } from "../utils/GlobalConsts";
+
+//#endregion
 
 export class Keys extends Phaser.Scene {
     constructor() {
@@ -15,6 +19,8 @@ export class Keys extends Phaser.Scene {
         // Initialize the `keys` object with properly typed values
         const keyboard = this.input.keyboard;
         if (!keyboard) return;
+
+        // Create keys
         keys.cursors = keyboard.createCursorKeys();
         keys.space = keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         keys.eKey = keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);

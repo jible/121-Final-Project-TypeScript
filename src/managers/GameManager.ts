@@ -1,13 +1,22 @@
-import { globalConstants } from "../utils/globalConsts";
-import { World } from "../prefabs/World.ts"
-import { PlantManager} from "../managers/PlantManager.ts"
-import { WinConManager} from "./WinManager.ts"
-import { worldTimeLine} from "./TimeLineManager.ts"
-import { Player} from "../prefabs/Player.ts"
-import { Vector} from "../utils/Vector.ts"
-import Phaser from "phaser";
-import { Clock } from "../utils/clock.ts";
+//#region --------------------------------------- IMPORTS
 
+// UTILITIES
+import { globalConstants } from "../utils/GlobalConsts";
+import { Vector} from "../utils/Vector"
+import { Clock } from "../utils/Clock";
+
+// MANAGERS
+import { PlantManager} from "./PlantManager"
+import { WinConManager} from "./WinManager"
+import { worldTimeLine} from "./TimeLineManager"
+
+// ELSE
+import { World } from "../prefabs/World"
+import { Player} from "../prefabs/Player"
+
+import Phaser from "phaser";
+
+//#endregion
 
 export class GameManager {
     tileSize = globalConstants.tileSize

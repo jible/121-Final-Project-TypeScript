@@ -1,7 +1,14 @@
-import { GameManager } from "./GameManager.ts";
-import { World } from "../prefabs/World.ts";
-import { Plant } from "../prefabs/Plants.ts";
-import { Vector } from "../utils/Vector.ts";
+//#region --------------------------------------- IMPORTS
+
+import { GameManager } from "./GameManager";
+
+import { World } from "../prefabs/World";
+import { Plant } from "../prefabs/Plants";
+
+import { Vector } from "../utils/Vector";
+
+//#endregion
+
 export class PlantManager {
   scene: Phaser.Scene;
   gameManager: GameManager;

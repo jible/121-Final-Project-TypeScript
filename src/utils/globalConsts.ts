@@ -1,4 +1,10 @@
+//#region --------------------------------------- IMPORTS
+
 import Phaser from "phaser";
+
+//#endregion
+
+//#region --------------------------------------- SIZING
 
 const tileSize = 8;
 const worldPadding = 4;
@@ -9,9 +15,9 @@ const gameDimensions = {
     height: tileSize * worldDimensions.height + tileSize * 3 + tileSize * worldPadding + uiZone.height * tileSize,
 }
 
+//#endregion
 
-
-// Define the keys object shape
+// Interface defining the shape of keyboard inputs tracked by the game.
 export interface KeysObject {
     cursors: Phaser.Types.Input.Keyboard.CursorKeys | null; // CursorKeys or null
     space: Phaser.Input.Keyboard.Key | null;
@@ -19,7 +25,7 @@ export interface KeysObject {
     gKey: Phaser.Input.Keyboard.Key | null;
 }
 
-// Export a properly typed `keys` object
+// Represents the keyboard keys used in the game.
 export const keys: KeysObject = {
     cursors: null,
     space: null,
@@ -27,18 +33,25 @@ export const keys: KeysObject = {
     gKey: null,
 };
 
+//#region --------------------------------------- UI
 
 export const globalConstants = {
     uiZone: uiZone,
+
     tileSize: tileSize,
     worldPadding: worldPadding,
     worldDimensions : worldDimensions,
     gameDimensions: gameDimensions,
+
     centerX: gameDimensions.width/2,
     centerY: gameDimensions.height/2,
+
+    // Color constants for various UI and debug elements, with CSS-compatible string formats
     testColor: 'color: #91aa86;',
     goodColor: 'color: #cfd1af;',
     badColor: 'color: #c088ae;',
+
+    // Default save data structure, representing initial states for saving/loading.
     defaultSaveData: {
         currentAction: {
             0: 0,
@@ -141,5 +154,6 @@ export const globalConstants = {
         formerStates: [],
         undoneStates: [],
     },
-    
 }
+
+//#endregion
