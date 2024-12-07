@@ -46,6 +46,7 @@ export class Play extends Phaser.Scene {
         // Retrieve the `UI` scene and display the play UI
         const uiScene = this.scene.get('uiScene');
         if (uiScene instanceof UI) {
+            console.log('UI scene found');
             uiScene.displayPlayUI();
         }
 

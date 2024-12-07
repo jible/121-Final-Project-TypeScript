@@ -21,7 +21,7 @@ export class UI extends Phaser.Scene {
 
   create() {
     // running checks
-    console.log("%cMENU SCENE :^)", globalConstants.testColor);
+    console.log("%cUI SCENE :^)", globalConstants.testColor);
   }
 
   displayPlayUI(): void {
@@ -34,9 +34,10 @@ export class UI extends Phaser.Scene {
       callback: () => void;
     }[] = [
       { xMultiplier: 1, text: "t", callback: () => this.tick() },  // Tick Button
-      { xMultiplier: 4, text: "s", callback: () => this.save() },  // Save Button
-      { xMultiplier: 7, text: "u", callback: () => this.undo() },  // Undo Button
-      { xMultiplier: 10, text: "r", callback: () => this.redo() }, // Redo Button
+      { xMultiplier: 3.5, text: "s", callback: () => this.save() },  // Save Button
+      { xMultiplier: 6, text: "u", callback: () => this.undo() },  // Undo Button
+      { xMultiplier: 8.5, text: "r", callback: () => this.redo() }, // Redo Button
+      { xMultiplier: 11, text: "q", callback: () => location.reload()}, // Quit Button
     ];
   
     buttonConfigs.forEach((config) => {
