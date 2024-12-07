@@ -43,7 +43,7 @@ export class Load extends Phaser.Scene {
         loadSpritesheet('sowEffect', './assets/spritesheets/sowSpritesheet.png', 16, 16)
 
         // load fonts
-        this.load.bitmapFont('pixelated', './assets/fonts/pixelated.png', 'assets/fonts/pixelated.xml')
+        this.load.bitmapFont('pixelated', './assets/fonts/pixelated/pixelated.png', 'assets/fonts/pixelated/pixelated.xml')
         // ex usage: this.add.bitmapText(100, 100, 'myFont', 'Hello Phaser!')
     }
 

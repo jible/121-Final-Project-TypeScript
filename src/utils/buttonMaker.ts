@@ -22,14 +22,12 @@ export function constructTextButton(
     upResult?: (pointer: Phaser.Input.Pointer) => void // Optional callback for pointerup event
 ) {
     // Create text content for the button
-    const content: Phaser.GameObjects.Text = scene.add.text(
+    const content: Phaser.GameObjects.Text = scene.add.bitmapText(
         x + padding / 2,
         y + padding / 2,
+        'pixelated',
         text,
-        {
-            fontSize: `${textSize - 2}px`, // Adjust the textSize to make it fit better
-            lineSpacing: 0,
-        }
+        8
     );
     content.height = textSize;
     content.setOrigin(0).setZ(100).setDepth(1);
