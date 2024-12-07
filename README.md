@@ -12,9 +12,9 @@ Our group initially thought the app development of our game was going to be incr
 - [x] [F3.b] The game must be localized to support three different written languages. At least one language must use a logographicLinks to an external site. script, and at least one language must use a right-to-leftLinks to an external site. script.
     - Finally after the localization was working with English, Jackson and Phoebe created seperate English, Korean, and Arabic JSON files that the localization can read in and translate the buttons according to the language chosen.
 - [x] [F3.c] The game must be installable on a smartphone-class mobile device in the sense that there is a way to get it to show up as a home-screen icon that feels similar to other installed apps. (It is okay if you only get this to work on one specific device. You do not need to deploy the game in a way that anyone else can install it without your help because that might be much more difficult for some game platforms.)
-    - Jack and James went through the tutorial given by Professor Smith to develop the app code.
+    - Jack and James went through the tutorial given by Professor Smith and Jack added the relavent code to the index.html file and created the web manifest file.
 - [x] [F3.d] Once installed in a mobile device, the game can be launched and satisfactorily played even when the device is not connected to the internet.
-    -
+    - Once the steps listed in the PWA tutorial posted by Professor Smith were completed, the game could be installed on devices and used offline automatically.
 
 ### F0+F1+F2
 - No major changes were made.
@@ -53,10 +53,10 @@ We decided on using English, Korean, and Arabic for our languages. We used some 
 The user can choose the desired language through the main save game slot scene. Each button decides the JSON file that'll be loaded into the game so it's very simple to add and delete languages as needed.
 
 ### Mobile Installation
-
+In order to get our game installable on smartphone-class devices, we followed the tutorial posted by Professor Smith about how to create a PWA from our game. Jack had initially tried to get Capacitor to work but the touch input wasn't working so we decided to go with the strategy outlined in the tutorial. Once the steps were completed the app was able to be downloaded!
 
 ### Mobile Play (Offline)
-
+- Once the tutorial was completed in Professor Smith's announcement, the app was able to be downloaded. Once it was installed through the browser app on our smartphones, it could be played without an internet connection by default.
 
 ## Devlog Entry = [12/2/2024]
 
