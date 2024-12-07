@@ -1,5 +1,63 @@
 # Converted Repo for CMPM121 Final Project
 
+## Devlog Entry = [12/6/2024]
+
+## Reflection
+Our group initially thought the app development of our game was going to be incredibly difficult for the quick turn around AGAIN. However, thankfully the app development was quite helpful with the demo announcement and Jack/James pulled through figuring out the code for the app. Jackson and Phoebe tackled the localization portion of the project and used the button creation function to change between the languages. Our group also developed a win condition scene, a visual passing of time for the player, and the actual app on the phone. Again, roles were changed around since our group meshes well and gets what we needed to get done. 
+
+## How we satisfied the software requirements
+### F3
+- [x] [F3.a] The game must be internationalized in way that allows all text visible to the player to be translated into different written languages (i.e. there are no messages that are hard-coded to display only English-language text, but it is fine for this requirement if English is the only supported display language).
+    - Jackson and Phoebe went through and asked Brace to create a localization function to translate and set the language the user decides. They ported it to a seperate file in order to keep the code clean.
+- [x] [F3.b] The game must be localized to support three different written languages. At least one language must use a logographicLinks to an external site. script, and at least one language must use a right-to-leftLinks to an external site. script.
+    - Finally after the localization was working with English, Jackson and Phoebe created seperate English, Korean, and Arabic JSON files that the localization can read in and translate the buttons according to the language chosen.
+- [x] [F3.c] The game must be installable on a smartphone-class mobile device in the sense that there is a way to get it to show up as a home-screen icon that feels similar to other installed apps. (It is okay if you only get this to work on one specific device. You do not need to deploy the game in a way that anyone else can install it without your help because that might be much more difficult for some game platforms.)
+    - Jack and James went through the tutorial given by Professor Smith to develop the app code.
+- [x] [F3.d] Once installed in a mobile device, the game can be launched and satisfactorily played even when the device is not connected to the internet.
+    -
+
+### F0+F1+F2
+- No major changes were made.
+
+### Internationalization
+Our code was changed in order to use JSON files for the specific languages the user wishes to read. We developed buttons with the specific languages, however since we figured it might be difficult to translate a lot of the buttons, we decided to just use the language translation through console logs. We then developed the buttons in the main gameplay into the language chosen by the player. 
+
+If you so choose to add another language; follow these steps:
+1. Create a JSON file with these specific JSON lines:
+`JSON
+{
+    "menu.new_game": "New Game",
+    "menu.load_game": "Load Game",
+    "saveGame": "Saved Game",
+    "english": "English",
+    "arabic": "العربية",
+    "korean": "한국어",
+    "gameplay.pause": "Game Paused",
+    "gameplay.play_scene": "Play Scene"
+}
+`
+
+Then inside the Menu.ts add another button so that the language can be chosen and translated into the game:
+
+`Menu.ts
+    constructTextButton(this, globalConstants.tileSize * 6, 80, 10, 3, this.localization.translate("desired language"), ()=>{
+        this.localization.switchLanguage("desired language");
+    })
+`
+
+This data will be pased as a data key into the play scene which will generate the desired language. 
+
+### Localization
+We decided on using English, Korean, and Arabic for our languages. We used some Brace in order to convert into the languages we needed and made the JSON file associated with it. 
+
+The user can choose the desired language through the main save game slot scene. Each button decides the JSON file that'll be loaded into the game so it's very simple to add and delete languages as needed.
+
+### Mobile Installation
+
+
+### Mobile Play (Offline)
+
+
 ## Devlog Entry = [12/2/2024]
 
 ## Reflection
