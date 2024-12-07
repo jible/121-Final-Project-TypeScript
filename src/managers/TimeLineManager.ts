@@ -1,6 +1,6 @@
 //#region --------------------------------------- IMPORTS
 
-import {GameManager} from "./GameManager.ts"
+import {GameManager} from "./GameManager"
 
 //#endregion
 

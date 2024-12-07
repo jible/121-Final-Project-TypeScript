@@ -1,14 +1,14 @@
 //#region --------------------------------------- IMPORTS
 
 // UTILITIES
-import { Vector } from "../utils/Vector.ts";
-import { bitWiseHelper } from "../utils/BitHelpers.ts";
-import { Clock } from "../utils/Clock.ts"
-import { worldPresets } from "../utils/ParseDSL.ts";
+import { Vector } from "../utils/Vector";
+import { bitWiseHelper } from "../utils/BitHelpers";
+import { Clock } from "../utils/Clock"
+import { worldPresets } from "../utils/ParseDSL";
 
 // ELSE
 import { GameManager } from "../managers/GameManager";
-import { Plant } from "../prefabs/Plants.ts";
+import { Plant } from "../prefabs/Plants";
 
 //#endregion
 

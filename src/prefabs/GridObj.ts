@@ -1,14 +1,14 @@
 //#region --------------------------------------- IMPORTS
 
 // UTILITIES
-import { Vector } from "../utils/Vector.ts"
+import { Vector } from "../utils/Vector"
 import { globalConstants } from "../utils/GlobalConsts";
 
 // MANAGERS
 import { GameManager } from "../managers/GameManager"
 
 // ELSE
-import { World } from "./World.ts"
+import { World } from "./World"
 
 import Phaser from "phaser"
 

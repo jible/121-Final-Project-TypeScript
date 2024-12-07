@@ -2,17 +2,17 @@
 
 // UTILITIES
 import { globalConstants } from "../utils/GlobalConsts";
-import { Vector} from "../utils/Vector.ts"
-import { Clock } from "../utils/Clock.ts";
+import { Vector} from "../utils/Vector"
+import { Clock } from "../utils/Clock";
 
 // MANAGERS
-import { PlantManager} from "./PlantManager.ts"
-import { WinConManager} from "./WinManager.ts"
-import { worldTimeLine} from "./TimeLineManager.ts"
+import { PlantManager} from "./PlantManager"
+import { WinConManager} from "./WinManager"
+import { worldTimeLine} from "./TimeLineManager"
 
 // ELSE
-import { World } from "../prefabs/World.ts"
-import { Player} from "../prefabs/Player.ts"
+import { World } from "../prefabs/World"
+import { Player} from "../prefabs/Player"
 
 import Phaser from "phaser";
 

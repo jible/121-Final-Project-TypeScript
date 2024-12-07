@@ -1,11 +1,11 @@
 //#region --------------------------------------- IMPORTS
 
-import { GameManager } from "./GameManager.ts";
+import { GameManager } from "./GameManager";
 
-import { World } from "../prefabs/World.ts";
-import { Plant } from "../prefabs/Plants.ts";
+import { World } from "../prefabs/World";
+import { Plant } from "../prefabs/Plants";
 
-import { Vector } from "../utils/Vector.ts";
+import { Vector } from "../utils/Vector";
 
 //#endregion
 

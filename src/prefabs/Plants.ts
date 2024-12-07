@@ -2,12 +2,12 @@
 
 // MANAGERS
 import { GameManager } from "../managers/GameManager";
-import { PlantManager } from "../managers/PlantManager.ts";
-import { WinConManager } from "../managers/WinManager.ts";
+import { PlantManager } from "../managers/PlantManager";
+import { WinConManager } from "../managers/WinManager";
 
 // ELSE
 import { GridObj } from "./GridObj";
-import { Vector } from "../utils/Vector.ts";
+import { Vector } from "../utils/Vector";
 
 //#endregion
 
