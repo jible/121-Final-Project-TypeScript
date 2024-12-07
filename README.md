@@ -53,7 +53,8 @@ We decided on using English, Korean, and Arabic for our languages. We used some 
 The user can choose the desired language through the main save game slot scene. Each button decides the JSON file that'll be loaded into the game so it's very simple to add and delete languages as needed.
 
 ### Mobile Installation
-In order to get our game installable on smartphone-class devices, we followed the tutorial posted by Professor Smith about how to create a PWA from our game. Jack had initially tried to get Capacitor to work but the touch input wasn't working so we decided to go with the strategy outlined in the tutorial. Once the steps were completed the app was able to be downloaded!
+In order to get our game installable on smartphone-class devices, we followed the tutorial posted by Professor Smith about how to create a PWA from our game. Jack had initially tried to get Capacitor to work but the touch input wasn't working so we decided to go with the strategy outlined in the tutorial. Once the steps were completed the app was able to be downloaded! We needed to add buttons that controlled the character's movement and actions, and also buttons that could undo, save, redo, and tick time. This is the link to the tutorial on canvas [Canvas Tutorial](https://canvas.ucsc.edu/courses/76391/discussion_topics/647812)
+
 
 ### Mobile Play (Offline)
 - Once the tutorial was completed in Professor Smith's announcement, the app was able to be downloaded. Once it was installed through the browser app on our smartphones, it could be played without an internet connection by default.
