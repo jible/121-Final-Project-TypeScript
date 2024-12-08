@@ -1,11 +1,11 @@
 {
-  "name": "Team 2 Final Game",
-  "short_name": "Farm",
-  "description": "Our submission for the final game project.",
-  "start_url": "../index.html",
-  "display": "fullscreen",
-  "icons": [{
-    "sizes": "180x180",
-    "src": "./assets/sprites/icon.png"
-  }]
-}
+    "name": "Team 2 Final Game",
+    "short_name": "Farm",
+    "description": "Our submission for the final game project.",
+    "start_url": "../index.html",
+    "display": "fullscreen",
+    "icons": [{
+      "sizes": "180x180",
+      "src": "./assets/sprites/icon.png"
+    }]
+  }
