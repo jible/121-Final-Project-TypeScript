@@ -12,6 +12,7 @@ import en from "../locales/en.json" assert {type: 'json'};
 // Load or delete from save slots and switch the game language.
 export class Menu extends Phaser.Scene {
     localization: Localization
+    title: any
     TEXT_SIZE: number = 10
     PADDING: number = 6
 
@@ -27,8 +28,14 @@ export class Menu extends Phaser.Scene {
 
         const saveSlotCount = 3;
 
-        const loadFileHeight = 2 * globalConstants.tileSize;
-        const deleteFileHeight = 4 * globalConstants.tileSize;
+        const loadFileHeight = 6 * globalConstants.tileSize;
+        const deleteFileHeight = 8 * globalConstants.tileSize;
+        const egnlishSelectHeight = 11 * globalConstants.tileSize;
+        const arabicSelectHeight = 14 * globalConstants.tileSize;
+        const koreanSelectHeight = 17 * globalConstants.tileSize;
+
+        //title
+        this.title = constructTextButton(this, globalConstants.tileSize * 4, globalConstants.tileSize * 3, 10, this.PADDING, this.localization.translate("menu.title"), () => {});
 
         for (let i = 1; i <= saveSlotCount; i++){
             const x = i * (globalConstants.tileSize * 3) ;
@@ -40,15 +47,20 @@ export class Menu extends Phaser.Scene {
             })
         }
 
-        constructTextButton(this, globalConstants.tileSize * 6, 50, 10, 3, this.localization.translate("english"), ()=>{
-            this.localization.switchLanguage("en");
+        constructTextButton(this, globalConstants.tileSize * 6, egnlishSelectHeight, 10, this.PADDING, this.localization.translate("english"), ()=>{
+            this.updateLanguage("en");
         })
-        constructTextButton(this, globalConstants.tileSize * 6, 65, 10, 3, this.localization.translate("arabic"), ()=>{
-            this.localization.switchLanguage("abr");
+        constructTextButton(this, globalConstants.tileSize * 6, arabicSelectHeight, 10, this.PADDING, this.localization.translate("arabic"), ()=>{
+            this.updateLanguage("abr");
         })
-        constructTextButton(this, globalConstants.tileSize * 6, 80, 10, 3, this.localization.translate("korean"), ()=>{
-            this.localization.switchLanguage("kr");
+        constructTextButton(this, globalConstants.tileSize * 6, koreanSelectHeight, 10, this.PADDING, this.localization.translate("korean"), ()=>{
+            this.updateLanguage("kr");
         })
+    }
+
+    updateLanguage(language: string){
+        this.localization.switchLanguage(language);
+        this.title.content.setText(this.localization.translate("menu.title"));
     }
 
     //#region------------------------------------ SAVE FILE FUNCTIONS
