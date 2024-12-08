@@ -6,6 +6,6 @@
     "display": "fullscreen",
     "icons": [{
       "sizes": "180x180",
-      "src": "./app-image.png"
+      "src": "./assets/sprites/icon.png"
     }]
   }
