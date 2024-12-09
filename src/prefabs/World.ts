@@ -1,14 +1,14 @@
 //#region --------------------------------------- IMPORTS
 
 // UTILITIES
-import { Vector } from "../utils/Vector";
-import { bitWiseHelper } from "../utils/BitHelpers";
-import { Clock } from "../utils/Clock"
-import { worldPresets } from "../utils/ParseDSL";
+import { Vector } from '../utils/Vector'
+import { bitWiseHelper } from '../utils/BitHelpers'
+import { Clock } from '../utils/Clock'
+import { worldPresets } from '../utils/ParseDSL'
 
 // ELSE
-import { GameManager } from "../managers/GameManager";
-import { Plant } from "../prefabs/Plants";
+import { GameManager } from '../managers/GameManager'
+import { Plant } from '../prefabs/Plants'
 
 //#endregion
 
@@ -17,8 +17,8 @@ import { Plant } from "../prefabs/Plants";
 export class Tile {
     gameManager: GameManager
     plant: Plant | null
-    waterLvl : number
-    sunLvl : number
+    waterLvl: number
+    sunLvl: number
 
     constructor(gameManager: GameManager, plant: Plant | null = null, waterLvl = 0, sunLvl = 0) {
         this.gameManager = gameManager
@@ -41,7 +41,7 @@ export class Tile {
         const decoded = this.decodeTileData(memento)
         this.sunLvl = decoded[bitWiseHelper.bitDetailsIndex.LIGHT_LEVEL]
         this.waterLvl = decoded[bitWiseHelper.bitDetailsIndex.WATER_LEVEL]
-        
+
         // Map back to your plant system if necessary
         if (decoded[bitWiseHelper.bitDetailsIndex.SPECIES] > 0) {
             this.plant = this.gameManager.plantManager.addPlant(
@@ -61,22 +61,30 @@ export class Tile {
     }
 
     // Encodes tile data (light, water, species, growth level) into a single bitfield.
-    encodeTileData(lightLevel: number, waterLevel: number, species: number, growthLevel: number): number {
+    encodeTileData(
+        lightLevel: number,
+        waterLevel: number,
+        species: number,
+        growthLevel: number,
+    ): number {
         let data = 0
         const tileData = [lightLevel, waterLevel, species, growthLevel]
 
         for (let i = 0; i < tileData.length; i++) {
-            data |= (tileData[i] & bitWiseHelper.bitLayout[i].mask) << bitWiseHelper.bitLayout[i].shift
+            data |=
+                (tileData[i] & bitWiseHelper.bitLayout[i].mask) << bitWiseHelper.bitLayout[i].shift
         }
-        
+
         return data
     }
 
     // Decodes a bitfield into tile data (light, water, species, growth level).
-    decodeTileData(data: number):  number[]{
-        let decoded = []
+    decodeTileData(data: number): number[] {
+        const decoded = []
         for (let i = 0; i < bitWiseHelper.bitLayout.length; i++) {
-            decoded.push((data >> bitWiseHelper.bitLayout[i].shift) & bitWiseHelper.bitLayout[i].mask)
+            decoded.push(
+                (data >> bitWiseHelper.bitLayout[i].shift) & bitWiseHelper.bitLayout[i].mask,
+            )
         }
         return decoded
     }
@@ -86,21 +94,21 @@ export class Tile {
 
 //#region --------------------------------------- WORLD
 
-interface GridSize {
-    height: number,
+export interface GridSize {
+    height: number
     width: number
 }
 
 export class World {
-    scene : Phaser.Scene
-    gameManager : GameManager
-    height : number
+    scene: Phaser.Scene
+    gameManager: GameManager
+    height: number
     width: number
-    tileSize : number
-    gridSize :GridSize
-    grid : Tile[][]
+    tileSize: number
+    gridSize: GridSize
+    grid: Tile[][]
 
-    constructor(gameManager: GameManager, gridSize :GridSize , tileSize : number) {
+    constructor(gameManager: GameManager, gridSize: GridSize, tileSize: number) {
         this.scene = gameManager.scene
         this.gameManager = gameManager
         // Dimension
@@ -132,7 +140,7 @@ export class World {
     exportWorldInstance(): Uint16Array {
         const bytesForTime = 2
         const bytesForPos = 1
-        let requiredbytes = this.width * this.height + bytesForTime + bytesForPos
+        const requiredbytes = this.width * this.height + bytesForTime + bytesForPos
 
         const byteAr = new Uint16Array(requiredbytes)
         let visitedTiles = 0
@@ -155,7 +163,7 @@ export class World {
     }
 
     // Restores the world's state from a byte array.
-    loadWorldInstance(data : Uint16Array): void {
+    loadWorldInstance(data: Uint16Array): void {
         let visitedTiles = 0
         for (let i = 0; i < this.width; i++) {
             for (let j = 0; j < this.height; j++) {
@@ -172,7 +180,7 @@ export class World {
             hour: data[visitedTiles + 2] >> 8,
             day: data[visitedTiles + 2] & bitWiseHelper.calculateMask(8),
         }
-        this.gameManager.time = new Clock(initialTime.day,initialTime.hour)
+        this.gameManager.time = new Clock(initialTime.day, initialTime.hour)
     }
 
     // Generates random weather effects and applies them to the tiles in the world.
@@ -185,16 +193,16 @@ export class World {
             for (let y = 0; y < this.gridSize.height; y++) {
                 const tile = this.getTile(new Vector(x, y))
                 if (!tile) continue
-            
+
                 switch (weather) {
-                    case "sunny":
+                    case 'sunny':
                         tile.sunLvl = 3
                         tile.waterLvl += Math.floor(Math.random() * 3)
-                        break;
-                    case "rainy":
+                        break
+                    case 'rainy':
                         tile.sunLvl = Math.floor(Math.random() * 2)
                         tile.waterLvl += 5
-                        break;
+                        break
                     default:
                         tile.sunLvl = Math.floor(Math.random() * 3)
                         tile.waterLvl += Math.floor(Math.random() * 3)
@@ -209,25 +217,25 @@ export class World {
     //#region ----------------------------------- WORLD INTERACTION
 
     // Checks if a player or entity can enter the tile at the given position.
-    checkEnterable(pos : Vector): boolean {
+    checkEnterable(pos: Vector): boolean {
         const tile = this.getTile(pos)
         return tile != null
     }
 
     // Checks if the specified position is suitable for planting.
-    checkPlantable(pos : Vector): boolean {
+    checkPlantable(pos: Vector): boolean {
         const tile = this.getTile(pos)
         return !!tile && !tile.plant
     }
 
     // Adds a plant to the specified tile if it is plantable.
-    addPlant(pos : Vector, obj : Plant): void {
+    addPlant(pos: Vector, obj: Plant): void {
         const tile = this.getTile(pos)
         tile && !tile.plant && (tile.plant = obj)
     }
 
     // Removes a plant from the specified tile.
-    removePlant(pos : Vector): boolean {
+    removePlant(pos: Vector): boolean {
         const tile = this.getTile(pos)
 
         if (tile && tile.plant) {
@@ -244,14 +252,14 @@ export class World {
     //#region ----------------------------------- HELPER FUNCTIONS
 
     // Fetches a `Tile` object at the specified position.
-    getTile(pos: {x: number, y: number}): Tile | null {
+    getTile(pos: { x: number; y: number }): Tile | null {
         return (this.grid && this.grid[pos.x] && this.grid[pos.x][pos.y]) || null
     }
 
     // Create ensurance
     assert(condition: boolean, message?: string): asserts condition {
         if (!condition) {
-            throw new Error(message || 'Assertion failed');
+            throw new Error(message || 'Assertion failed')
         }
     }
 
@@ -265,7 +273,7 @@ export class World {
     }
 
     // Renders a tile at the given position within the game world.
-    #renderTile(x : number, y : number, index:number, key = 'grass-spritesheet'): void {
+    #renderTile(x: number, y: number, index: number, key = 'grass-spritesheet'): void {
         const trueX = x * this.tileSize + this.tileSize / 2
         const trueY = y * this.tileSize + this.tileSize / 2
 

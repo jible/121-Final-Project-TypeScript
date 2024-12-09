@@ -1,20 +1,21 @@
 //#region --------------------------------------- IMPORTS
 
 // UTILITIES
-import { globalConstants } from "../utils/GlobalConsts";
-import { Vector} from "../utils/Vector"
-import { Clock } from "../utils/Clock";
+import { globalConstants } from '../utils/GlobalConsts'
+import { Vector } from '../utils/Vector'
+import { Clock } from '../utils/Clock'
 
 // MANAGERS
-import { PlantManager} from "./PlantManager"
-import { WinConManager} from "./WinManager"
-import { worldTimeLine} from "./TimeLineManager"
+import { PlantManager } from './PlantManager'
+import { WinConManager } from './WinManager'
+import { worldTimeLine } from './TimeLineManager'
 
 // ELSE
-import { World } from "../prefabs/World"
-import { Player} from "../prefabs/Player"
+import { GridSize, World } from '../prefabs/World'
+import { Player } from '../prefabs/Player'
 
-import Phaser from "phaser";
+import Phaser from 'phaser'
+import { Play } from '../scenes/Play'
 
 //#endregion
 
@@ -29,10 +30,10 @@ export class GameManager {
     player: Player
     timeLine: worldTimeLine
     worldUpdated: CustomEvent
-    constructor(scene: Phaser.Scene, gridSize: Object, tileSize : number, saveName = 'Slot:1') {
+    constructor(scene: Phaser.Scene, gridSize: GridSize, tileSize: number, saveName = 'Slot:1') {
         this.scene = scene
         this.time = new Clock()
-        this.saveName = saveName;
+        this.saveName = saveName
         // Instantiate key modules
         this.world = new World(this, gridSize, tileSize)
 
@@ -52,12 +53,12 @@ export class GameManager {
         })
     }
 
-    save(){
-        localStorage.setItem(this.saveName, this.timeLine.exportState());
+    save() {
+        localStorage.setItem(this.saveName, this.timeLine.exportState())
     }
 
-    load(){
-        const file = (localStorage.getItem(this.saveName));
+    load() {
+        const file = localStorage.getItem(this.saveName)
         file && this.timeLine.loadGame(file)
     }
 
@@ -67,7 +68,7 @@ export class GameManager {
         this.timeLine.addState()
     }
 
-    update(time : number, delta: number) {
+    update(time: number, delta: number) {
         this.player.update(time, delta)
     }
 
@@ -75,7 +76,7 @@ export class GameManager {
         console.table(this.world.grid)
         this.gameStateUpdated()
         // Update time
-        this.time.tick(hour,day)
+        this.time.tick(hour, day)
 
         this.plantManager.tick()
 
@@ -84,13 +85,15 @@ export class GameManager {
         // Check win condition
         if (this.winManager.checkWinCondition()) {
             this.scene.scene.stop('uiScene')
-            this.scene.scene.start('wonScene', {
-                LOCALIZATION: this.scene.localization
-            })
+            if (this.scene instanceof Play) {
+                this.scene.scene.start('wonScene', {
+                    LOCALIZATION: this.scene.localization,
+                })
+            }
         }
     }
 
-    setPlayer(player : Player) {
+    setPlayer(player: Player) {
         // Associate the player instance with GameManager
         this.player = player
     }

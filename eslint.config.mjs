@@ -13,7 +13,8 @@ export default [
   eslintConfigPrettier,
   {
     rules: {
-      "@typescript-eslint/no-unused-vars" : "warn"
+      "@typescript-eslint/no-unused-vars" : "warn",
+      "@typescript-eslint/no-unused-expressions" : "warn"
     }
   }
 ];
