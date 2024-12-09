@@ -46,8 +46,8 @@ export class Menu extends Phaser.Scene {
         constructTextButton(this, globalConstants.tileSize * 6, 65, 10, 3, this.localization.translate("arabic"), ()=>{
             this.localization.switchLanguage("abr");
         })
-        constructTextButton(this, globalConstants.tileSize * 6, 80, 10, 3, this.localization.translate("korean"), ()=>{
-            this.localization.switchLanguage("kr");
+        constructTextButton(this, globalConstants.tileSize * 6, 80, 10, 3, this.localization.translate("japanese"), ()=>{
+            this.localization.switchLanguage("jp");
         })
     }
 

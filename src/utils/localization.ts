@@ -3,6 +3,7 @@
 import en from "../locales/en.json" assert {type: 'json'};      // english
 import kr from "../locales/kr.json" assert { type: "json" };    // korean
 import abr from "../locales/abr.json" assert { type: "json" };  // arabic
+import jp from "../locales/jp.json" assert { type: "json" };  // japanese
 
 //#endregion
 
@@ -39,6 +40,9 @@ export class Localization {
                 break
             case "abr":
                 this.setLanguage(abr)
+                break
+            case "jp":
+                this.setLanguage(jp)
                 break
             default:
                 console.warn(`Unsupported language: ${language}`)

@@ -25,7 +25,7 @@ export function constructTextButton(
     const content: Phaser.GameObjects.Text = scene.add.bitmapText(
         x + padding / 2,
         y + padding / 2,
-        'pixelated',
+        'japanese',
         text,
         8
     );
