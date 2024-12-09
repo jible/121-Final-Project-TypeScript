@@ -57,7 +57,7 @@ In order to get our game installable on smartphone-class devices, we followed th
 
 
 ### Mobile Play (Offline)
-- Once the tutorial was completed in Professor Smith's announcement, the app was able to be downloaded. Once it was installed through the browser app on our smartphones, it could be played without an internet connection by default. We needed to add buttons that controlled the character's movement and actions, and also buttons that could undo, save, redo, and tick time. There were no changes necessary to make the app playable online once it was installed, it worked offline automatically.
+Once the tutorial was completed in Professor Smith's announcement, the app was able to be downloaded. Once it was installed through the browser app on our smartphones, it could be played without an internet connection by default. We needed to add buttons that controlled the character's movement and actions, and also buttons that could undo, save, redo, and tick time. There were no changes necessary to make the app playable online once it was installed, it worked offline automatically.
 
 ## Devlog Entry = [12/2/2024]
 
