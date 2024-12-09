@@ -7,7 +7,7 @@ const configFile = fs.readFileSync('public/gameConfig.dsl', 'utf-8')
 
 /**
  * Parses an external DSL config file to assemble game condition.
- * 
+ *
  * The expected DSL syntax includes:
  * - `weather-random: true/false` - Whether the weather is random or predefined
  * - `winning-plant-num: <number>` - Number of plants required to win
@@ -15,22 +15,21 @@ const configFile = fs.readFileSync('public/gameConfig.dsl', 'utf-8')
  * - `day <n>:` where `n` specifies the day
  * - `weather: <condition>` specifies the weather for a day
  * - `end-day`, `end-rules`, and `end-file` mark segments of the DSL
- * 
+ *
  * @param input - The DSL configuration string to parse
  * @returns An object representing the parsed game world presets
  */
 export function parseDSL(input: string) {
-
     //#region ----------------------------------- ASSEMBLY
 
     const lines: string[] = input.split('\n')
 
     interface presetCollection {
-        weatherRandom: boolean      // Determines if weather is randomly assigned
-        startingWeather: string     // The initial weather condition
-        winningPlantNum: number     // Number of plants to win the game
-        winningPlantGrowth: number  // The required growth level of plants to win
-        days: string[]              // Array holding game state for specific days
+        weatherRandom: boolean // Determines if weather is randomly assigned
+        startingWeather: string // The initial weather condition
+        winningPlantNum: number // Number of plants to win the game
+        winningPlantGrowth: number // The required growth level of plants to win
+        days: string[] // Array holding game state for specific days
     }
 
     const worldPresets: presetCollection = {
@@ -56,9 +55,9 @@ export function parseDSL(input: string) {
                 case 'rules:':
                     // console.log('STARTING RULES SECTION:')
                     break
-                
+
                 // ------------------------------ WIN CONDITIONING
-                
+
                 case 'weather-random:':
                     // console.log(`WEATHER RANDOM?: ${words[1]}`)
                     // COMMAND FOR RANDOM OR SET WEATHER
@@ -74,7 +73,7 @@ export function parseDSL(input: string) {
                     worldPresets.winningPlantGrowth = Number(words[1])
                     // COMMAND TO CHANGE WIN CONDITION
                     break
-                
+
                 // ------------------------------ DAY SPECIFICS
 
                 case 'day':
@@ -102,11 +101,11 @@ export function parseDSL(input: string) {
                     break
                 case 'end-file':
                     break
-                
+
                 // ------------------------------ ERROR CASE
 
                 default:
-                    // console.error('Bad formatting of the .dsl file.')
+                // console.error('Bad formatting of the .dsl file.')
             }
         }
     }
