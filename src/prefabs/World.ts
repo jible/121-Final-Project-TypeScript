@@ -164,6 +164,7 @@ export class World {
 
     // Restores the world's state from a byte array.
     loadWorldInstance(data: Uint16Array): void {
+        this.gameManager.plantManager.plantCollection.clear()
         let visitedTiles = 0
         for (let i = 0; i < this.width; i++) {
             for (let j = 0; j < this.height; j++) {

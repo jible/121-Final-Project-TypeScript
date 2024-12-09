@@ -73,14 +73,12 @@ export class GameManager {
     }
 
     tick(hour = 1, day = 0) {
-        this.gameStateUpdated()
         // Update time
         this.time.tick(hour, day)
 
-        this.plantManager.tick()
-
         // Trigger world/weather updates and plant mechanics
         this.world.generateRandomWeather()
+        this.plantManager.tick()
         // Check win condition
         if (this.winManager.checkWinCondition()) {
             this.scene.scene.stop('uiScene')
@@ -90,6 +88,8 @@ export class GameManager {
                 })
             }
         }
+
+        this.gameStateUpdated()
     }
 
     setPlayer(player: Player) {
