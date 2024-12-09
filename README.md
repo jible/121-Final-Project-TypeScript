@@ -20,7 +20,7 @@ Our group initially thought the app development of our game was going to be incr
 - No major changes were made.
 
 ### Internationalization
-Our code was changed in order to use JSON files for the specific languages the user wishes to read. We developed buttons with the specific languages, however since we figured it might be difficult to translate a lot of the buttons, we decided to just use the language translation through console logs. We then developed the buttons in the main gameplay into the language chosen by the player. 
+Our code was changed in order to use JSON files for the specific languages the user wishes to read. Our game doesn't feature much text but we converted all string literals to instead refer to a specific localization class that stores the corresponding strings from the JSON files we made.
 
 If you so choose to add another language; follow these steps:
 1. Create a JSON file with these specific JSON lines:
