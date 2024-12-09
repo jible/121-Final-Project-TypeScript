@@ -20,6 +20,7 @@ export class WinConManager {
         const ripePlants = Array.from(
             this.GAME_MANAGER.plantManager.plantCollection.values(),
         ).filter(plant => plant.growthLevel >= WinConManager.WINNING_GROWTH_LEVEL)
+        console.log(ripePlants.length)
         return ripePlants.length >= WinConManager.WINNING_PLANT_COUNT
     }
     setWinGrowthLevel(growthLevel: number) {
