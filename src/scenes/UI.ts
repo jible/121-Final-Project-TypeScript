@@ -2,7 +2,7 @@
 
 import { globalConstants } from "../utils/GlobalConsts";
 import { InputHandler } from "../utils/InputHandler";
-import { constructTextButton } from "../utils/ButtonMaker"
+import { constructTextButton, constructImgButton } from "../utils/ButtonMaker"
 
 import { Play } from "./Play";
 
@@ -21,32 +21,35 @@ export class UI extends Phaser.Scene {
 
   create() {
     // running checks
-    console.log("%cMENU SCENE :^)", globalConstants.testColor);
+    console.log("%cUI SCENE :^)", globalConstants.testColor);
   }
 
   displayPlayUI(): void {
     
     //#region ----------------------------------- GAME STATE BUTTONS
-
+    const uiButtonName = 'playButtons'
     const buttonConfigs: {
       xMultiplier: number;
-      text: string;
+      key: string;
+      index: number;
       callback: () => void;
     }[] = [
-      { xMultiplier: 1, text: "t", callback: () => this.tick() },  // Tick Button
-      { xMultiplier: 4, text: "s", callback: () => this.save() },  // Save Button
-      { xMultiplier: 7, text: "u", callback: () => this.undo() },  // Undo Button
-      { xMultiplier: 10, text: "r", callback: () => this.redo() }, // Redo Button
+      { xMultiplier: 1, key: uiButtonName, index: 0, callback: () => this.tick() },  // Tick Button
+      { xMultiplier: 3.5, key: uiButtonName, index: 1, callback: () => this.save() },  // Save Button
+      { xMultiplier: 6, key: uiButtonName, index: 2, callback: () => this.undo() },  // Undo Button
+      { xMultiplier: 8.5, key: uiButtonName, index: 3, callback: () => this.redo() }, // Redo Button
+      { xMultiplier: 11, key: uiButtonName, index: 4, callback: () => location.reload()}, // Quit Button
     ];
   
     buttonConfigs.forEach((config) => {
-      constructTextButton(
+      constructImgButton(
         this,
         config.xMultiplier * this.TILE_SIZE,  // X
         this.TILE_SIZE,                       // Y
-        this.TEXT_SIZE,                       // Text-size
-        this.PADDING,                         // Padding
-        config.text,
+        this.TILE_SIZE,                       // Text-size
+        this.PADDING + 2,                         // Padding
+        config.key,
+        config.index,
         config.callback
       );
     });
@@ -60,62 +63,63 @@ export class UI extends Phaser.Scene {
     const interactionButtonConfigs: {
       xMultiplier: number;
       yOffset: number;
-      text: string;
+      index: number;
       onPress: () => void;
       onRelease?: () => void;
     }[] = [
       {
         xMultiplier: 4,
         yOffset: 0,
-        text: "^",
+        index: 5,
         onPress: () => (InputHandler.up = true),
         onRelease: () => (InputHandler.up = false),
       },
       {
         xMultiplier: 4,
         yOffset: 3 * this.TILE_SIZE,
-        text: "_",
+        index: 6,
         onPress: () => (InputHandler.down = true),
         onRelease: () => (InputHandler.down = false),
       },
       {
         xMultiplier: 1,
         yOffset: 3 * this.TILE_SIZE,
-        text: "<",
+        index: 7,
         onPress: () => (InputHandler.left = true),
         onRelease: () => (InputHandler.left = false),
       },
       {
         xMultiplier: 7,
         yOffset: 3 * this.TILE_SIZE,
-        text: ">",
+        index: 8,
         onPress: () => (InputHandler.right = true),
         onRelease: () => (InputHandler.right = false),
       },
       {
         xMultiplier: 11,
         yOffset: 0,
-        text: "}",
+        index: 9,
         onPress: () => (InputHandler.reap = true),
         onRelease: () => (InputHandler.reap = false),
       },
       {
         xMultiplier: 11,
         yOffset: 3 * this.TILE_SIZE,
-        text: "{",
+        index: 10,
         onPress: () => (InputHandler.sow = true),
         onRelease: () => (InputHandler.sow = false),
       },
     ];
     
     interactionButtonConfigs.forEach((config) => {
-      constructTextButton(
+      constructImgButton(
         this,
         config.xMultiplier * this.TILE_SIZE,  // X
         uiZoneHeight + config.yOffset,        // Y
         this.TEXT_SIZE,                       // Text-size
         this.PADDING,                         // Padding
-        config.text,                          // Button text
+        uiButtonName,
+        config.index,                          // Button text
         config.onPress,                       // Button press callback
         config.onRelease                      // Button release callback (end input)
       );

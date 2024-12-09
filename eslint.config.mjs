@@ -10,5 +10,12 @@ export default [
   {languageOptions: { globals: globals.browser }},
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
-  eslintConfigPrettier
+  eslintConfigPrettier,
+  {
+    rules: {
+      "@typescript-no-console": "warn",
+      "@typescript-no-unused-vars": "warn",
+      "@typescript-no-unused-expressions": "warn"
+    }
+  }
 ];

@@ -1,7 +1,7 @@
 {
-    "name": "template-parcel-ts",
+    "name": "farm-game",
     "version": "1.2.0",
-    "description": "A Phaser 3 TypeScript template using Parcel 2 as the bundler.",
+    "description": "A Phaser 3 grid based farm game.",
     "source": "./index.html",
     "browserslist": "> 0.25%, last 2 versions, not dead",
     "scripts": {
@@ -23,7 +23,6 @@
     "bugs": {
         "url": "https://github.com/phaserjs/template-parcel-ts/issues"
     },
-    "homepage": "https://github.com/phaserjs/template-parcel-ts#readme",
     "devDependencies": {
         "@eslint/js": "^9.16.0",
         "@parcel/packager-raw-url": "^2.13.2",

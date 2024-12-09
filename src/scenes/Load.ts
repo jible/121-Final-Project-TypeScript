@@ -42,6 +42,9 @@ export class Load extends Phaser.Scene {
         loadSpritesheet('waterEffect', './assets/spritesheets/waterSpritesheet.png', 16, 16)
         loadSpritesheet('sowEffect', './assets/spritesheets/sowSpritesheet.png', 16, 16)
 
+        // load buttoons
+        loadSpritesheet('playButtons', './assets/spritesheets/playButtonSpritesheet.png', 8, 8)
+
         // load fonts
         this.load.bitmapFont('english', './assets/fonts/pixelated/pixelated.png', './assets/fonts/pixelated/pixelated.xml')
         this.load.bitmapFont('arabic', './assets/fonts/arabic-pixel-1/ArabicPixel1.png', './assets/fonts/arabic-pixel-1/ArabicPixel1.xml')

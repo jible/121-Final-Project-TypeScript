@@ -159,7 +159,7 @@ export class World {
         let visitedTiles = 0
         for (let i = 0; i < this.width; i++) {
             for (let j = 0; j < this.height; j++) {
-                this.grid[i][j].loadTile(data[visitedTiles], new Vector(i, j), this.scene)
+                this.grid[i][j].loadTile(data[visitedTiles], new Vector(i, j))
                 visitedTiles++
             }
         }
