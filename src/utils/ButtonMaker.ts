@@ -23,11 +23,12 @@ export function constructTextButton(
     font: string = "english",
 ) {
     // Create text content for the button
-    const content: Phaser.GameObjects.Text = scene.add.bitmapText(
+    const content: Phaser.GameObjects.BitmapText = scene.add.bitmapText(
         x + padding / 2,
         y + padding / 2,
         font,
         text,
+        textSize
     );
     //content.height = textSize;
     content.setOrigin(0).setZ(100).setDepth(1);
