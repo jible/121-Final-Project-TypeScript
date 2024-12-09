@@ -29,6 +29,10 @@ export class Localization {
         this.currentLanguage = languageFile
     }
 
+    getLanguage(): string {
+        return this.currentLanguage.font
+    }
+
     // Switches the active language to a specified language.
     switchLanguage(language: string): void {
         switch (language) {

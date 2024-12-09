@@ -2,7 +2,7 @@
 
 import { globalConstants } from "../utils/GlobalConsts";
 import { InputHandler } from "../utils/InputHandler";
-import { constructTextButton, constructImgButton } from "../utils/ButtonMaker"
+import { constructImgButton } from "../utils/ButtonMaker"
 
 import { Play } from "./Play";
 

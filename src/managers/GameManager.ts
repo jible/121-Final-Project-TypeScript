@@ -82,7 +82,10 @@ export class GameManager {
         this.world.generateRandomWeather()
         // Check win condition
         if (this.winManager.checkWinCondition()) {
-            console.log('🔥 YOU WIN! 🔥')
+            this.scene.scene.stop('uiScene')
+            this.scene.scene.start('wonScene', {
+                LOCALIZATION: this.scene.localization
+            })
         }
     }
 

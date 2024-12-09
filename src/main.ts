@@ -4,6 +4,7 @@
 import { Load } from './scenes/Load';
 import { Menu } from './scenes/Menu';
 import { Play } from './scenes/Play';
+import { Won } from './scenes/Won'
 import { UI } from './scenes/UI';
 import { Keys } from './scenes/Keys';
 
@@ -32,7 +33,7 @@ const config: Types.Core.GameConfig = {
         window.innerWidth / globalConstants.gameDimensions.width - 0.1,
     ),
     scene: [
-        Load, Menu, Play,Keys, UI,
+        Load, Menu, Play, Won, Keys, UI,
     ]
 };
 
