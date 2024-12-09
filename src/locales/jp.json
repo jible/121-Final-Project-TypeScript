@@ -6,5 +6,6 @@
     "arabic": "العربية",
     "japanese": "日本語",
     "gameplay.pause": "ゲームが一時停止されました",
-    "gameplay.play_scene": "シーンを再生"
+    "gameplay.play_scene": "シーンを再生",
+    "font": "japanese"
 }
