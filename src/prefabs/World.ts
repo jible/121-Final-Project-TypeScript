@@ -185,7 +185,7 @@ export class World {
             for (let y = 0; y < this.gridSize.height; y++) {
                 const tile = this.getTile(new Vector(x, y))
                 if (!tile) continue
-
+            
                 switch (weather) {
                     case "sunny":
                         tile.sunLvl = 3
@@ -196,13 +196,8 @@ export class World {
                         tile.waterLvl += 5
                         break;
                     default:
-                        if (worldPresets.weatherRandom) {
-                            tile.sunLvl = Math.floor(Math.random() * 3)
-                            tile.waterLvl += Math.floor(Math.random() * 3)
-                        } else {
-                            tile.sunLvl = 2
-                            tile.waterLvl = 5
-                        }
+                        tile.sunLvl = Math.floor(Math.random() * 3)
+                        tile.waterLvl += Math.floor(Math.random() * 3)
                         break
                 }
             }

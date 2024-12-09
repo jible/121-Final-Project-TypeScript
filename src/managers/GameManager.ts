@@ -72,6 +72,7 @@ export class GameManager {
     }
 
     tick(hour = 1, day = 0) {
+        console.table(this.world.grid)
         this.gameStateUpdated()
         // Update time
         this.time.tick(hour,day)

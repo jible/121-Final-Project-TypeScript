@@ -28,8 +28,8 @@ export class PlantManager {
     {
       name: "lily",
       sprite: "lily",
-      waterReq: 1,
-      sunReq: 1,
+      waterReq: 0,
+      sunReq: 0,
       neighborReq: 8,
     },
     {
@@ -37,7 +37,7 @@ export class PlantManager {
       sprite: "sunflower",
       waterReq: 1,
       sunReq: 1,
-      neighborReq: 8,
+      neighborReq: 0,
     },
     {
       name: "daisy",
