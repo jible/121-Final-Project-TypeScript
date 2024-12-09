@@ -13,7 +13,7 @@ import Phaser from "phaser";
 // Load or delete from save slots and switch the game language.
 export class Menu extends Phaser.Scene {
     localization: Localization
-    title: Phaser.bitmapText
+    title: Phaser.GameObjects.BitmapText
     TEXT_SIZE: number = 10
     PADDING: number = 6
 
@@ -36,7 +36,7 @@ export class Menu extends Phaser.Scene {
         const japaneseSelectHeight = 17 * globalConstants.tileSize;
 
         //title
-        this.title = constructTextButton(this, globalConstants.tileSize * 4, globalConstants.tileSize * 3, 10, this.PADDING, this.localization.translate("menu.title"), () => {}, undefined, 'en');
+        this.title = constructTextButton(this, globalConstants.tileSize * 4, globalConstants.tileSize * 3, 10, this.PADDING, this.localization.translate("menu.title"), () => {}, undefined, 'en').content;
 
         for (let i = 1; i <= saveSlotCount; i++){
             const x = i * (globalConstants.tileSize * 3) ;
@@ -61,8 +61,8 @@ export class Menu extends Phaser.Scene {
 
     updateLanguage(language: string){
         this.localization.switchLanguage(language);
-        this.title.content.setFont(language)
-        this.title.content.setText(this.localization.translate("menu.title"));
+        this.title.setFont(language)
+        this.title.setText(this.localization.translate("menu.title"));
     }
 
     //#region------------------------------------ SAVE FILE FUNCTIONS
