@@ -4,7 +4,8 @@
     "saveGame": "اللعبة المحفوظة",
     "english": "English",
     "arabic": "العربية",
-    "korean": "한국어",
+    "japanese": "日本語",
     "gameplay.pause": "اللعبة متوقفة مؤقتًا",
-    "gameplay.play_scene": "مشهد اللعب"
+    "gameplay.play_scene": "مشهد اللعب",
+    "font": "arabic"
 }
