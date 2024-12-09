@@ -5,6 +5,7 @@ import { globalConstants } from "../utils/GlobalConsts";
 import { Localization } from "../utils/Localization";
 
 import en from "../locales/en.json" assert {type: 'json'};
+import Phaser from "phaser";
 
 //#endregion
 
@@ -12,7 +13,7 @@ import en from "../locales/en.json" assert {type: 'json'};
 // Load or delete from save slots and switch the game language.
 export class Menu extends Phaser.Scene {
     localization: Localization
-    title: any
+    title: Phaser.bitmapText
     TEXT_SIZE: number = 10
     PADDING: number = 6
 
@@ -35,7 +36,7 @@ export class Menu extends Phaser.Scene {
         const japaneseSelectHeight = 17 * globalConstants.tileSize;
 
         //title
-        this.title = constructTextButton(this, globalConstants.tileSize * 4, globalConstants.tileSize * 3, 10, this.PADDING, this.localization.translate("menu.title"), () => {});
+        this.title = constructTextButton(this, globalConstants.tileSize * 4, globalConstants.tileSize * 3, 10, this.PADDING, this.localization.translate("menu.title"), () => {}, undefined, 'en');
 
         for (let i = 1; i <= saveSlotCount; i++){
             const x = i * (globalConstants.tileSize * 3) ;
@@ -49,17 +50,18 @@ export class Menu extends Phaser.Scene {
 
         constructTextButton(this, globalConstants.tileSize * 6, egnlishSelectHeight, 10, this.PADDING, this.localization.translate("english"), ()=>{
             this.updateLanguage("en");
-        }, undefined, 'english')
+        }, undefined, 'en')
         constructTextButton(this, globalConstants.tileSize * 6, arabicSelectHeight, 10, this.PADDING, this.localization.translate("arabic"), ()=>{
             this.updateLanguage("abr");
-        }, undefined, 'arabic')
+        }, undefined, 'abr')
         constructTextButton(this, globalConstants.tileSize * 6, japaneseSelectHeight, 10, this.PADDING, this.localization.translate("japanese"), ()=>{
             this.updateLanguage("jp");
-        }, undefined, 'japanese')
+        }, undefined, 'jp')
     }
 
     updateLanguage(language: string){
         this.localization.switchLanguage(language);
+        this.title.content.setFont(language)
         this.title.content.setText(this.localization.translate("menu.title"));
     }
 

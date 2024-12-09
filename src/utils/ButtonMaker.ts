@@ -20,7 +20,7 @@ export function constructTextButton(
     // asscosciated buttons
     downResult: (pointer: Phaser.Input.Pointer) => void, // Callback for pointerdown event
     upResult?: (pointer: Phaser.Input.Pointer) => void, // Optional callback for pointerup event
-    font: string = "english",
+    font: string = "en",
 ) {
     // Create text content for the button
     const content: Phaser.GameObjects.BitmapText = scene.add.bitmapText(

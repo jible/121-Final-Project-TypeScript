@@ -1,4 +1,5 @@
 {
+    "menu.title": "プラーント・ボイ",
     "menu.new_game": "新しいゲーム",
     "menu.load_game": "ゲームをロード",
     "saveGame": "保存されたゲーム",
@@ -7,5 +8,5 @@
     "japanese": "ジャパニーズ",
     "gameplay.pause": "ゲームが一時停止されました",
     "gameplay.play_scene": "シーンを再生",
-    "font": "japanese"
+    "font": "jp"
 }
