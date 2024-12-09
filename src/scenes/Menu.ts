@@ -32,23 +32,23 @@ export class Menu extends Phaser.Scene {
 
         for (let i = 1; i <= saveSlotCount; i++){
             const x = i * (globalConstants.tileSize * 3) ;
-            constructTextButton( this,x, loadFileHeight , this.TEXT_SIZE, this.PADDING, (i).toString(), ()=>{
+            constructTextButton( this,x, loadFileHeight , this.TEXT_SIZE, this.PADDING,  (i).toString(), ()=>{
                 this.loadSave(i)
             })
-            constructTextButton( this, x, deleteFileHeight, this.TEXT_SIZE ,this.PADDING, "X", () => {
+            constructTextButton( this, x, deleteFileHeight, this.TEXT_SIZE ,this.PADDING,  "X", () => {
                 this.deleteSave(i)
             })
         }
 
-        constructTextButton(this, globalConstants.tileSize * 6, 50, 10, this.PADDING, this.localization.translate("english"), ()=>{
+        constructTextButton(this, globalConstants.tileSize * 6, 50, 10, 3, this.localization.translate("english"), ()=>{
             this.localization.switchLanguage("en");
-        }, undefined, 'english')
-        constructTextButton(this, globalConstants.tileSize * 6, 65, 10, this.PADDING, this.localization.translate("arabic"), ()=>{
+        })
+        constructTextButton(this, globalConstants.tileSize * 6, 65, 10, 3, this.localization.translate("arabic"), ()=>{
             this.localization.switchLanguage("abr");
-        }, undefined, 'arabic')
-        constructTextButton(this, globalConstants.tileSize * 6, 80, 10, this.PADDING, this.localization.translate("japanese"), ()=>{
+        })
+        constructTextButton(this, globalConstants.tileSize * 6, 80, 10, 3, this.localization.translate("japanese"), ()=>{
             this.localization.switchLanguage("jp");
-        }, undefined, 'japanese')
+        })
     }
 
     //#region------------------------------------ SAVE FILE FUNCTIONS

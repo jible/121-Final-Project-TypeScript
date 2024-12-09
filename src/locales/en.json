@@ -4,8 +4,7 @@
     "saveGame": "Saved Game",
     "english": "English",
     "arabic": "العربية",
-    "japanese": "日本語",
+    "korean": "한국어",
     "gameplay.pause": "Game Paused",
-    "gameplay.play_scene": "Play Scene",
-    "font": "english"
+    "gameplay.play_scene": "Play Scene"
 }

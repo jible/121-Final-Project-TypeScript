@@ -19,17 +19,17 @@ export function constructTextButton(
     text: string = "default text",
     // asscosciated buttons
     downResult: (pointer: Phaser.Input.Pointer) => void, // Callback for pointerdown event
-    upResult?: (pointer: Phaser.Input.Pointer) => void, // Optional callback for pointerup event
-    font: string = "english",
+    upResult?: (pointer: Phaser.Input.Pointer) => void // Optional callback for pointerup event
 ) {
     // Create text content for the button
     const content: Phaser.GameObjects.Text = scene.add.bitmapText(
         x + padding / 2,
         y + padding / 2,
-        font,
+        'japanese',
         text,
+        8
     );
-    //content.height = textSize;
+    content.height = textSize;
     content.setOrigin(0).setZ(100).setDepth(1);
 
     // Create box as button frame
