@@ -75,7 +75,7 @@ export class Plant extends GridObj {
         if (!tile) return false
         const waterReq = tile.waterLvl >= this.WATER_RULE
         const sunReq = tile.sunLvl >= this.SUN_RULE
-        const adjReq = this.checkPlantNeighbors() > this.NEIGHBOR_RULE
+        const adjReq = this.checkPlantNeighbors() >= this.NEIGHBOR_RULE
         return waterReq && sunReq && adjReq && this.growthLevel < WinConManager.WINNING_GROWTH_LEVEL
     }
 
