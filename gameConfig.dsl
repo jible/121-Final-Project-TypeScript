@@ -1,7 +1,7 @@
 rules:
 weather-random: true
 winning-plant-num: 6
-winning-plant-growth: 3
+winning-plant-growth: 2
 end-rules
 day 1:
 weather: sunny
