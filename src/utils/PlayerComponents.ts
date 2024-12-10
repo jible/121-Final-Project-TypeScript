@@ -1,18 +1,18 @@
 //#region --------------------------------------- IMPORTS
 
 // UTILITIES
-import { Vector } from "./Vector"
-import { InputHandler } from "./InputHandler"
-import { keys } from "./GlobalConsts"
-import { State } from "./StateMachine"
+import { Vector } from './Vector'
+import { InputHandler } from './InputHandler'
+import { keys } from './GlobalConsts'
+import { State } from './StateMachine'
 
 // PREFABS
-import { World } from "../prefabs/World"
-import { Player } from "../prefabs/Player"
+import { World } from '../prefabs/World'
+import { Player } from '../prefabs/Player'
 
 // ELSE
-import { GameManager } from "../managers/GameManager"
-import Phaser from "phaser"
+import { GameManager } from '../managers/GameManager'
+import Phaser from 'phaser'
 
 //#endregion
 
@@ -21,18 +21,18 @@ import Phaser from "phaser"
 export function initializePlayerState(player: Player) {
     const stateArray: State[] = [
         {
-            name :  'idle',
+            name: 'idle',
             enter() {
                 //play idle anim
                 player.play('player-idle')
             },
             exit() {},
             update() {
-                function readInput(direction : Vector){
+                function readInput(direction: Vector) {
                     player.direction = direction
                     player.sm.changeState('walk')
                 }
-                
+
                 if ((keys.cursors && keys.cursors.left.isDown) || InputHandler.left) {
                     readInput(new Vector(-1, 0))
                 } else if ((keys.cursors && keys.cursors.down.isDown) || InputHandler.down) {
@@ -41,14 +41,17 @@ export function initializePlayerState(player: Player) {
                     readInput(new Vector(0, -1))
                 } else if ((keys.cursors && keys.cursors.right.isDown) || InputHandler.right) {
                     readInput(new Vector(1, 0))
-                } else if ((keys.space &&keys.space.isDown) || InputHandler.reap) {
+                } else if ((keys.space && keys.space.isDown) || InputHandler.reap) {
                     player.sm.changeState('reap')
                 } else if ((keys.eKey && keys.eKey.isDown) || InputHandler.sow) {
                     player.sm.changeState('sow')
-                } else if (keys.gKey && Phaser.Input.Keyboard.JustDown(keys.gKey)) {
+                } else if (
+                    (keys.gKey && Phaser.Input.Keyboard.JustDown(keys.gKey)) ||
+                    InputHandler.dance
+                ) {
                     player.sm.changeState('dance')
                 }
-            }
+            },
         },
         {
             name: 'walk',
@@ -64,7 +67,7 @@ export function initializePlayerState(player: Player) {
             update(time: number, delta: number) {
                 // Update movement component
                 player.moveComp.update(time, delta)
-            }
+            },
         },
         {
             name: 'reap',
@@ -102,13 +105,13 @@ export function initializePlayerState(player: Player) {
             },
             exit() {},
             update() {
-                if (keys.gKey && !keys.gKey.isDown) {
+                if (keys.gKey && !keys.gKey.isDown && !InputHandler.dance) {
                     player.sm.changeState('idle')
                 }
             },
         },
     ]
-    
+
     return stateArray
 }
 
@@ -118,27 +121,30 @@ export function initializePlayerState(player: Player) {
 
 // Base class for player components
 export class Componenet {
-    parent: Player;
+    parent: Player
 
-    constructor(parent : Player) {
+    constructor(parent: Player) {
         this.parent = parent
     }
 }
 
 // Handles player movement
 export class MoveComp extends Componenet {
-    targetGridPosition: Vector;
-    startGridPosition: Vector;
-    trueTargetPosition: Vector;
-    speedVector: Vector; 
-    callback: (() => void) | null;
-    walking: boolean;
-    gameManager: GameManager;
-    world: World;
+    targetGridPosition: Vector
+    startGridPosition: Vector
+    trueTargetPosition: Vector
+    speedVector: Vector
+    callback: (() => void) | null
+    walking: boolean
+    gameManager: GameManager
+    world: World
 
     constructor(parent: Player) {
         super(parent)
-        this.targetGridPosition = this.startGridPosition = this.trueTargetPosition = new Vector(0, 0)
+        this.targetGridPosition =
+            this.startGridPosition =
+            this.trueTargetPosition =
+                new Vector(0, 0)
         this.callback = null
         this.gameManager = parent.gameManager
         this.world = this.gameManager.world
@@ -168,39 +174,39 @@ export class MoveComp extends Componenet {
     // Handles movement logic, snapping position to grid when necessary.
     moveRoutine(time: number, delta: number): void {
         // Handle the X-axis
-        this.parent.x += (this.speedVector.x * delta) / 5;
+        this.parent.x += (this.speedVector.x * delta) / 5
         if (
             (this.parent.x > this.trueTargetPosition.x && this.parent.direction.x > 0) ||
             (this.parent.x < this.trueTargetPosition.x && this.parent.direction.x < 0)
         ) {
             // Snap X position to target
-            this.parent.x = this.trueTargetPosition.x;
-            this.parent.position.x = this.targetGridPosition.x;
+            this.parent.x = this.trueTargetPosition.x
+            this.parent.position.x = this.targetGridPosition.x
         }
-    
+
         // Handle the Y-axis
-        this.parent.y += (this.speedVector.y * delta) / 5;
+        this.parent.y += (this.speedVector.y * delta) / 5
         if (
             (this.parent.y > this.trueTargetPosition.y && this.parent.direction.y > 0) ||
             (this.parent.y < this.trueTargetPosition.y && this.parent.direction.y < 0)
         ) {
             // Snap Y position to target
-            this.parent.y = this.trueTargetPosition.y;
-            this.parent.position.y = this.targetGridPosition.y;
+            this.parent.y = this.trueTargetPosition.y
+            this.parent.position.y = this.targetGridPosition.y
         }
-    
+
         // Check if fully arrived at the final position
         if (
             this.parent.x === this.trueTargetPosition.x &&
             this.parent.y === this.trueTargetPosition.y
         ) {
             // Finalize movement
-            this.parent.position = this.targetGridPosition.copy();
+            this.parent.position = this.targetGridPosition.copy()
             if (this.callback) {
-                this.callback(); // Execute callback
+                this.callback() // Execute callback
             }
-            this.walking = false; // Mark movement as complete
-            return;
+            this.walking = false // Mark movement as complete
+            return
         }
     }
 }

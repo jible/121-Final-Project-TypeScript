@@ -45,14 +45,15 @@ export class Plant extends GridObj {
     // Sets the growth level of the plant and updates its appearance.
     setGrowth(level: number): void {
         this.growthLevel = level
-        this.setTint(this.tint + 0xffb3b3 * level)
+        this.setFrame(this.growthLevel)
+        console.log(this.growthLevel)
     }
 
     // Attempts to grow the plant if growth conditions are met.
     // Deducts the required water level from the tile upon successful growth.
     grow(): void {
         if (this.checkCanGrow()) {
-            this.growthLevel++
+            this.setGrowth(this.growthLevel + 1)
             this.setTint(this.tint + 0xffb3b3)
             const tile = this.world.getTile(this.position)
             if (!tile) return
